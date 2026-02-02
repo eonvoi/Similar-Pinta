@@ -1,4 +1,4 @@
-#define ProductName "Pinta"
+#define ProductName "Familiar Pinta"
 #define ProductVersion "3.2"
 
 ; The architecture can be configured on the command line to build the arm64 or x64 installer

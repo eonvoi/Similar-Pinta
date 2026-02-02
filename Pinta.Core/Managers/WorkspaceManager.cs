@@ -303,6 +303,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			if (importer is not null) {
 				Document imported = importer.Import (file);
 				ActivateDocument (imported);
+				Pinta.Core.RecentlyOpenedFilesManager.TryAddRecentFile(file.GetPath());
 			} else {
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
@@ -312,6 +313,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 						Document imported = format.Importer!.Import (file);
 						ActivateDocument (imported);
 						loaded = true;
+						Pinta.Core.RecentlyOpenedFilesManager.TryAddRecentFile(file.GetPath());
 						break;
 					} catch (UnauthorizedAccessException) {
 						// If the file can't be accessed, don't retry for every format.
@@ -352,9 +354,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 	internal void ResetTitle ()
 	{
 		if (HasOpenDocuments)
-			chrome_manager.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Pinta";
+			chrome_manager.MainWindow.Title = $"{ActiveDocument.DisplayName}{(ActiveDocument.IsDirty ? "*" : "")} - Familiar Pinta";
 		else
-			chrome_manager.MainWindow.Title = "Pinta";
+			chrome_manager.MainWindow.Title = "Familiar Pinta";
 	}
 
 	public void SetActiveDocument (int index)

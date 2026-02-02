@@ -51,29 +51,32 @@ public sealed class EdgeDetectEffect : BaseEffect
 		ColorDifference.RenderColorDifferenceEffect (weights, src, dest, rois);
 	}
 
-	private static double[,] ComputeWeights (RadiansAngle angle)
-	{
-		// angle delta for each weight
-		const double ANGLE_DELTA = Math.PI / 4.0;
+private static double[] ComputeWeights(RadiansAngle angle)
+{
+    const double AngleDelta = Math.PI / 4.0;
 
-		double[,] weights = new double[3, 3];
+    double a = angle.Radians;
 
-		// for angle = 0 this builds an edge detect filter pointing straight left
+    // row-major order:
+    // [0] [1] [2]
+    // [3] [4] [5]
+    // [6] [7] [8]
+    var weights = new double[9];
 
-		weights[0, 0] = Math.Cos (angle.Radians + ANGLE_DELTA);
-		weights[0, 1] = Math.Cos (angle.Radians + 2.0 * ANGLE_DELTA);
-		weights[0, 2] = Math.Cos (angle.Radians + 3.0 * ANGLE_DELTA);
+    weights[0] = Math.Cos(a + AngleDelta);
+    weights[1] = Math.Cos(a + 2.0 * AngleDelta);
+    weights[2] = Math.Cos(a + 3.0 * AngleDelta);
 
-		weights[1, 0] = Math.Cos (angle.Radians);
-		weights[1, 1] = 0;
-		weights[1, 2] = Math.Cos (angle.Radians + 4.0 * ANGLE_DELTA);
+    weights[3] = Math.Cos(a);
+    weights[4] = 0.0;
+    weights[5] = Math.Cos(a + 4.0 * AngleDelta);
 
-		weights[2, 0] = Math.Cos (angle.Radians - ANGLE_DELTA);
-		weights[2, 1] = Math.Cos (angle.Radians - 2.0 * ANGLE_DELTA);
-		weights[2, 2] = Math.Cos (angle.Radians - 3.0 * ANGLE_DELTA);
+    weights[6] = Math.Cos(a - AngleDelta);
+    weights[7] = Math.Cos(a - 2.0 * AngleDelta);
+    weights[8] = Math.Cos(a - 3.0 * AngleDelta);
 
-		return weights;
-	}
+    return weights;
+}
 }
 
 public sealed class EdgeDetectData : EffectData

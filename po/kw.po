@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2026-01-28 10:50+0000\n"
+"PO-Revision-Date: 2026-01-10 04:09+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/pinta/pinta/kw/>"
 "\n"
@@ -23,7 +23,7 @@ msgstr ""
 "1000000 == 100000) ? 2 : ((n % 100 == 3 || n % 100 == 23 || n % 100 == 43 || "
 "n % 100 == 63 || n % 100 == 83) ? 3 : ((n != 1 && (n % 100 == 1 || n % 100 "
 "== 21 || n % 100 == 41 || n % 100 == 61 || n % 100 == 81)) ? 4 : 5))));\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -194,7 +194,7 @@ msgstr "Kilva:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
-msgstr "Selys war'n ober a Paint.NET:"
+msgstr "Selys war an ober a Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:23
@@ -598,7 +598,7 @@ msgstr "Desedha dhe Dewis"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr "Liwvord A-Lemmyn"
+msgstr "Liwvord a'n Jydh"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
@@ -707,7 +707,7 @@ msgstr "Braster iskarg: {0}"
 msgid "Duplicate Layer"
 msgstr "Kopia Gwiskas"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Gul ha golegi avenyow yn es"
@@ -1054,7 +1054,7 @@ msgstr "A ty na sawya, oll chanjyow a wra kellys yn andileadow."
 msgid "Image"
 msgstr "Aven"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Chanjyell Aven"
 
@@ -1717,7 +1717,7 @@ msgstr ""
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1731,7 +1731,7 @@ msgstr ""
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr ""
 
@@ -1743,7 +1743,7 @@ msgstr ""
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2731,7 +2731,7 @@ msgstr ""
 msgid "by Pinta contributors"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 

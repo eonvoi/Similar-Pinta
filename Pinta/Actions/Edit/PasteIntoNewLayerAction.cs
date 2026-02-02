@@ -69,7 +69,7 @@ internal sealed class PasteIntoNewLayerAction : IActionHandler
 		var doc = workspace.ActiveDocument;
 
 		// Get the scroll position in canvas coordinates
-		var view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
+		var view = (Gtk.Viewport) doc.Workspace.PintaCanvas.Parent!;
 
 		PointD viewPoint = new (
 			X: view.Hadjustment!.Value,

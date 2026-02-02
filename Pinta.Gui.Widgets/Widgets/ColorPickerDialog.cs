@@ -193,13 +193,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		bool showWatches = !livePalette;
 
-		Gtk.Button resetButton = new () {
-			Label = Translations.GetString ("Reset"),
-			FocusOnClick = false
-		};
+		Gtk.Button resetButton = new () { Label = Translations.GetString ("Reset Color") };
 		resetButton.OnClicked += OnResetButtonClicked;
 
-		Gtk.Button shrinkButton = new () { FocusOnClick = false };
+		Gtk.Button shrinkButton = new ();
 		shrinkButton.OnClicked += OnShrinkButtonClicked;
 		shrinkButton.SetIconName (
 			DEFAULT_SMALL_MODE
@@ -207,7 +204,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			: Resources.StandardIcons.WindowMinimize);
 
 		Gtk.Button okButton = new () { Label = Translations.GetString ("OK") };
-		okButton.ReceivesDefault = true;
 		okButton.OnClicked += OnOkButtonClicked;
 		okButton.AddCssClass (AdwaitaStyles.SuggestedAction);
 
@@ -244,11 +240,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		colorDisplayBox.SetOrientation (Gtk.Orientation.Vertical);
 		if (adjustable is PaletteColors paletteColors) {
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
-			string shortcutLabel = Translations.GetString ("Shortcut key");
-			Gtk.Button colorDisplaySwap = new () {
-				TooltipText = $"{label} {shortcutLabel}: {"X"}",
-				FocusOnClick = false
-			};
+			string shortcut_label = Translations.GetString ("Shortcut key");
+			Gtk.Button colorDisplaySwap = new () { TooltipText = $"{label} {shortcut_label}: {"X"}" };
 			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
 			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
 			colorDisplayBox.Append (colorDisplaySwap);
@@ -268,14 +261,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
 			Active = true,
 			Label = Translations.GetString ("Show Value"),
-			TooltipText = Translations.GetString ("If enabled, the Value component is applied to the color wheel."),
-			FocusOnClick = false
 		};
 		pickerSurfaceOptionDrawValue.SetVisible (DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat);
 		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
 
 		Gtk.ToggleButton pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
-		pickerSurfaceSatVal.FocusOnClick = false;
 		pickerSurfaceSatVal.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.SatAndVal;
 		pickerSurfaceSatVal.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.SatAndVal;
@@ -285,7 +275,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// When Gir.Core supports it, this should probably be replaced with a toggle group.
 		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
-		pickerSurfaceHueSat.FocusOnClick = false;
 		pickerSurfaceHueSat.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat;
 		pickerSurfaceHueSat.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.HueAndSat;
@@ -504,7 +493,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			palette.PrimaryColorChanged += PrimaryChangeHandler;
 			palette.SecondaryColorChanged += SecondaryChangeHandler;
 			IsActivePropertyDefinition.Notify (this, ActiveWindowChangeHandler);
-			OnCloseRequest += HandleCloseRequest;
+			OnResponse += ColorPickerDialog_OnResponse;
 		}
 
 		// --- Initialization (Gtk.Widget)
@@ -528,10 +517,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultWidth = 1;
 		DefaultHeight = 1;
 
-		// --- Initialization (Gtk.Window)
+		// --- Initialization (Gtk.Dialog)
 
-		SetDefaultWidget (okButton);
-		okButton.GrabFocus ();
+		this.SetDefaultResponse (Gtk.ResponseType.Cancel);
 
 		// --- References to keep
 
@@ -584,12 +572,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				Gtk.DrawingArea primaryColorDisplay = new ();
 				primaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
 				primaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Primary));
-				primaryColorDisplay.SetTooltipText (Translations.GetString ("Click to select primary color."));
 
 				Gtk.DrawingArea secondaryColorDisplay = new ();
 				secondaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
 				secondaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Secondary));
-				secondaryColorDisplay.SetTooltipText (Translations.GetString ("Click to select secondary color."));
 
 				return [primaryColorDisplay, secondaryColorDisplay];
 			default:
@@ -626,16 +612,22 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, paletteRect), currentPalette.Colors[i]);
 	}
 
-	bool HandleCloseRequest (Gtk.Window window, EventArgs args)
+	void ColorPickerDialog_OnResponse (Gtk.Dialog _, ResponseSignalArgs args)
 	{
 		// Remove event handlers on exit (in particular, we don't want to handle the
 		// 'is-active' property changing as the dialog is being closed (bug #1390)).
+
+		Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
+
+		// Don't attempt to remove the signals again when the dialog is deleted, which
+		// triggers Gtk.ResponseType.DeleteEvent.
+
+		if (response != Gtk.ResponseType.Cancel && response != Gtk.ResponseType.Ok)
+			return;
+
 		palette.PrimaryColorChanged -= PrimaryChangeHandler;
 		palette.SecondaryColorChanged -= SecondaryChangeHandler;
 		IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
-
-		// Return false to allow the dialog to continue closing.
-		return false;
 	}
 
 	void ActiveWindowChangeHandler (object? _, NotifySignalArgs __)
@@ -686,7 +678,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.GestureDrag.DragBeginSignalArgs e)
 	{
 		gesture.GetStartPoint (out double startX, out double startY);
+
+		if (!double.IsFinite (startX) || !double.IsFinite (startY))
+			return;
+
 		PointD absPos = new (startX, startY);
+
 
 		if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD _)) {
 			mouse_on_picker_surface = true;
@@ -723,9 +720,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (!mouse_on_picker_surface)
 			return;
 
-		gesture.GetStartPoint (out double startX, out double startY);
-		PointD absPos = new (startX + e.OffsetX, startY + e.OffsetY);
-		SetColorFromPickerSurface (absPos);
+		try {
+			gesture.GetStartPoint (out double startX, out double startY);
+			if (!double.IsFinite (startX + e.OffsetX) || !double.IsFinite (startY + e.OffsetY))
+				return;
+
+			PointD absPos = new (startX + e.OffsetX, startY + e.OffsetY);
+			SetColorFromPickerSurface (absPos);
+		} catch { }
 	}
 
 	private void DragGesture_OnDragEnd (
@@ -739,17 +741,16 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.EventControllerKey _,
 		Gtk.EventControllerKey.KeyPressedSignalArgs e)
 	{
-		if (e.GetKey ().Value == Gdk.Constants.KEY_x) {
+		if (e.GetKey ().Value == Gdk.Constants.KEY_x)
 			CycleColors ();
-			return true;
-		}
-
-		// Allow the key to be handled elsewhere (e.g. Esc for closing the dialog).
-		return false;
+		return true;
 	}
 
 	private void HexEntry_OnChanged (Gtk.Editable sender, EventArgs _)
 	{
+		if (isUpdatingView)
+	return;
+
 		if ((GetFocus ()?.Parent) != sender) return;
 		CurrentColor = Color.FromHex (sender.GetText ()) ?? CurrentColor;
 		UpdateView ();
@@ -797,30 +798,40 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		UpdateView ();
 	}
 
+	bool isUpdatingView;
+
 	private void UpdateView ()
 	{
-		// Redraw picker surfaces
-		picker_surface_cursor.QueueDraw ();
-		picker_surface.QueueDraw ();
+		if (isUpdatingView)
+			return;
 
-		// Update sliders with current color
-		Color current = CurrentColor;
-		hue_slider.Color = current;
-		saturation_slider.Color = current;
-		value_slider.Color = current;
-		red_slider.Color = current;
-		green_slider.Color = current;
-		blue_slider.Color = current;
-		alpha_slider.Color = current;
+		isUpdatingView = true;
+		try {
+			// Redraw picker surfaces
+			picker_surface_cursor.QueueDraw ();
+			picker_surface.QueueDraw ();
+
+			// Update sliders with current color
+			Color current = CurrentColor;
+			hue_slider.Color = current;
+			saturation_slider.Color = current;
+			value_slider.Color = current;
+			red_slider.Color = current;
+			green_slider.Color = current;
+			blue_slider.Color = current;
+			alpha_slider.Color = current;
 
 
-		// Update hex
-		if (GetFocus ()?.Parent != hex_entry)
-			hex_entry.SetText (current.ToHex ());
+			// Update hex
+			if (GetFocus ()?.Parent != hex_entry)
+				hex_entry.SetText (current.ToHex ());
 
-		// Redraw palette displays
-		foreach (var display in color_displays)
-			display.QueueDraw ();
+			// Redraw palette displays
+			foreach (var display in color_displays)
+				display.QueueDraw ();
+		} finally {
+			isUpdatingView = false;
+		}
 	}
 
 	private void DrawPaletteDisplay (Context g, Color c)
@@ -951,6 +962,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	void SetColorFromPickerSurface (PointD point)
 	{
+		if (picker_surface_radius <= 0)
+			return;
+
 		picker_surface.TranslateCoordinates (
 			this,
 			PICKER_SURFACE_PADDING,

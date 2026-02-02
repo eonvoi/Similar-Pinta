@@ -33,11 +33,13 @@ namespace Pinta.Core;
 public sealed class FileActions
 {
 	public Command New { get; }
-	public Command NewScreenshot { get; }
+	//public Command NewScreenshot { get; }
 	public Command Open { get; }
+	public Command OpenRecent { get; }
 	public Command Close { get; }
 	public Command Save { get; }
 	public Command SaveAs { get; }
+	public Command SaveAll { get; }
 	public Command Print { get; }
 
 	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
@@ -62,11 +64,11 @@ public sealed class FileActions
 			shortcuts: ["<Primary>N"]
 		) { ShortLabel = Translations.GetString ("New") };
 
-		NewScreenshot = new Command (
+		/* NewScreenshot = new Command (
 			"NewScreenshot",
 			Translations.GetString ("New Screenshot..."),
 			null,
-			Resources.StandardIcons.ViewFullscreen);
+			Resources.StandardIcons.ViewFullscreen); */
 
 		Open = new Command (
 			"open",
@@ -75,6 +77,13 @@ public sealed class FileActions
 			Resources.StandardIcons.DocumentOpen,
 			shortcuts: ["<Primary>O"]
 		) { ShortLabel = Translations.GetString ("Open") };
+
+		OpenRecent = new Command (
+			"recent",
+			Translations.GetString ("Open Recent"),
+			null,
+			Resources.StandardIcons.DocumentOpen
+		) { ShortLabel = Translations.GetString ("Recent") };
 
 		Close = new Command (
 			"close",
@@ -97,6 +106,13 @@ public sealed class FileActions
 			Resources.StandardIcons.DocumentSaveAs,
 			shortcuts: ["<Primary><Shift>S"]);
 
+		SaveAll = new Command (
+			"SaveAll",
+			Translations.GetString ("Save All"),
+			null,
+			Resources.StandardIcons.DocumentSave,
+			shortcuts: ["<Ctrl><Alt>A"]);
+
 		Print = new Command (
 			"print",
 			Translations.GetString ("Print"),
@@ -107,40 +123,110 @@ public sealed class FileActions
 		this.app = app;
 	}
 
-	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
+	Gtk.Application? application = null;
+	Gio.Menu? recent_files_menu = null;
+
+	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
+		// store a reference to the application
+		application = app;
 		bool isMac = system.OperatingSystem == OS.Mac;
 
 		Gio.Menu save_section = Gio.Menu.New ();
 		save_section.AppendItem (Save.CreateMenuItem ());
 		save_section.AppendItem (SaveAs.CreateMenuItem ());
+		save_section.AppendItem (SaveAll.CreateMenuItem ());
 
 		Gio.Menu close_section = Gio.Menu.New ();
 		close_section.AppendItem (Close.CreateMenuItem ());
-		if (!isMac) close_section.AppendItem (app.Exit.CreateMenuItem ()); // This is part of the application menu on macOS
 
 		menu.AppendItem (New.CreateMenuItem ());
-		menu.AppendItem (NewScreenshot.CreateMenuItem ());
+		// Removing this since it is not in Paint.NET 5.1.11
+		//menu.AppendItem (NewScreenshot.CreateMenuItem ());
 		menu.AppendItem (Open.CreateMenuItem ());
+
+		// open recent
+		// store as variable to reuse later in `RefreshRecentFilesList`
+		recent_files_menu = Gio.Menu.New ();
+		menu.AppendSubmenu (Translations.GetString ("Open Recent"), recent_files_menu);
+		#region i'm king terry the terrible (it's static)
+		RecentlyOpenedFilesManager.RefreshOpenRecentListAction = RefreshRecentFilesList;
+		#endregion
+		RefreshRecentFilesList ();
+
 		menu.AppendSection (null, save_section);
 		menu.AppendSection (null, close_section);
+
+		// Already in Mac's app menu (apparently)
+		if (!isMac) {
+			Gio.Menu exit_section = Gio.Menu.New ();
+			exit_section.AppendItem (this.app.Exit.CreateMenuItem ());
+			menu.AppendSection (null, exit_section);
+		}
 #if false
 		// Printing is disabled for now until it is fully functional.
 		menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 		menu.AppendSeparator ();
 #endif
-		application.AddCommands ([
+		app.AddCommands ([
 			New,
-			NewScreenshot,
+			//NewScreenshot,
 			Open,
+			OpenRecent,
 
 			Save,
 			SaveAs,
+			SaveAll,
 
 			Close]);
 
 		if (!isMac)
-			application.AddCommand (app.Exit); // This is part of the application menu on macOS
+			app.AddCommand (this.app.Exit); // This is part of the application menu on macOS
+	}
+
+	public void RefreshRecentFilesList ()
+	{
+		if (application == null || recent_files_menu == null)
+		{
+			return;
+		}
+
+		var recentFiles = RecentlyOpenedFilesManager.GetRecentFiles ();
+		recent_files_menu.RemoveAll();
+
+		if (recentFiles == null || recentFiles.Count == 0) {
+			var item = new Gio.MenuItem ();
+			item.SetLabel ("None");
+			item.SetAttributeValue ("enabled", GLib.Variant.NewBoolean (false));
+			recent_files_menu.AppendItem (item);
+		} else {
+			foreach (string filePath in recentFiles) {
+				var item = new Gio.MenuItem ();
+				item.SetLabel (filePath);
+
+				// all filePaths get assigned to the same action
+				// targetValue is the "parameter" we later get in `action.OnActivate`
+				item.SetActionAndTargetValue ("app.open_recent", GLib.Variant.NewString (filePath));
+
+				recent_files_menu.AppendItem (item);
+			}
+
+			// create "open_recent" if it is null
+			// (im too stupid to add it to ActionHandlers lol)
+			if (application.LookupAction ("open_recent") == null) {
+				var action = Gio.SimpleAction.New ("open_recent", GLib.VariantType.String);
+
+				// listen for "open_recent" activations (like the user clicking the menu item)
+				action.OnActivate += (sender, e) => {
+					string path = e.Parameter?.GetString (out _) ?? ""; // length is discarded with "out _" since its not needed
+					if (!string.IsNullOrEmpty (path)) {
+						PintaCore.Workspace.OpenFile (Gio.FileHelper.NewForPath (path));
+					}
+				};
+
+				application.AddAction (action);
+			}
+		}
 	}
 
 	public void RegisterHandlers () { }

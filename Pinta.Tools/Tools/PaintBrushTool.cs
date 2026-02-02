@@ -89,37 +89,35 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
+		// Clear tool layer at start of stroke
 		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = false;
 
 		base.OnMouseDown (document, e);
 
 		active_brush?.DoMouseDown ();
+		last_point = e.Point; // start tracking
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (active_brush is null)
-			return;
-
-		if (mouse_button is not (MouseButton.Left or MouseButton.Right)) {
+		if (active_brush is null || mouse_button is not (MouseButton.Left or MouseButton.Right)) {
 			last_point = null;
 			return;
 		}
 
-		// TODO: also multiply color by pressure
-		Color strokeColor = mouse_button switch {
-			MouseButton.Right => new (
-				Palette.SecondaryColor.R,
-				Palette.SecondaryColor.G,
-				Palette.SecondaryColor.B,
-				Palette.SecondaryColor.A * active_brush.StrokeAlphaMultiplier
+		var strokeColor = mouse_button switch {
+			MouseButton.Right => new Color (
+			    Palette.SecondaryColor.R,
+			    Palette.SecondaryColor.G,
+			    Palette.SecondaryColor.B,
+			    Palette.SecondaryColor.A * active_brush.StrokeAlphaMultiplier
 			),
-			MouseButton.Left or _ => new (
-				Palette.PrimaryColor.R,
-				Palette.PrimaryColor.G,
-				Palette.PrimaryColor.B,
-				Palette.PrimaryColor.A * active_brush.StrokeAlphaMultiplier
+			_ => new Color (
+			    Palette.PrimaryColor.R,
+			    Palette.PrimaryColor.G,
+			    Palette.PrimaryColor.B,
+			    Palette.PrimaryColor.A * active_brush.StrokeAlphaMultiplier
 			)
 		};
 
@@ -129,49 +127,72 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (document.Workspace.PointInCanvas (e.PointDouble))
 			surface_modified = true;
 
-		var surf = document.Layers.ToolLayer.Surface;
-		using Context g = document.CreateClippedToolContext ();
-
+		// Draw preview into ToolLayer.Surface
+		var toolSurf = document.Layers.ToolLayer.Surface;
+		using var g = document.CreateClippedToolContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 		g.LineWidth = BrushWidth;
 		g.LineJoin = LineJoin.Round;
 		g.LineCap = LineCap.Round;
 		g.SetSourceColor (strokeColor);
 
-		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
-
+		var strokeArgs = new BrushStrokeArgs (strokeColor, e.Point, last_point.Value);
 		CancelRepeatingDraw ();
-		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
 
-		// If we draw partially offscreen, Cairo gives us a bogus
-		// dirty rectangle, so redraw everything.
-		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+		// Draw current segment of stroke into ToolLayer
+		var dirtyRect = active_brush.DoMouseMove (g, toolSurf, strokeArgs);
+
+		// Invalidate the proper region
+		if (document.Workspace.IsPartiallyOffscreen (dirtyRect))
 			document.Workspace.Invalidate ();
 		else
-			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
+			document.Workspace.Invalidate (document.ClampToImageSize (dirtyRect));
 
-		if (active_brush.MillisecondsBeforeReapply != 0) {
-			open_repeating_draw_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, active_brush.MillisecondsBeforeReapply, () => {
-				OnMouseMove (document, e);
-				return true;
-			});
-		}
+		// Support repeating brushes
+		if (active_brush.MillisecondsBeforeReapply != 0)
+			open_repeating_draw_id = GLib.Functions.TimeoutAdd (
+			    GLib.Constants.PRIORITY_DEFAULT,
+			    active_brush.MillisecondsBeforeReapply,
+			    () => { OnMouseMove (document, e); return true; }
+			);
+
 		last_point = e.Point;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		CancelRepeatingDraw ();
-		using Context g = new (document.Layers.CurrentUserLayer.Surface);
+		active_brush?.DoMouseUp ();
 
-		document.Layers.ToolLayer.Draw (g);
+		var toolLayer = document.Layers.ToolLayer;
+		var userLayer = document.Layers.CurrentUserLayer;
 
-		document.Layers.ToolLayer.Hidden = true;
+		// Instead of creating a new Context, use the ToolLayer surface directly
+		// with a temporary context to merge into the user layer
+		using (var g = new Context (userLayer.Surface)) {
+			// Explicitly set operator to SourceOver for normal blending
+			g.Operator = Operator.Over;
+
+			// Reset transformation if tool layer has any transform
+			g.IdentityMatrix ();
+
+			// Paint tool layer pixels onto user layer
+			g.SetSourceSurface (toolLayer.Surface, 0, 0);
+			g.Paint ();
+		}
+
+		// Now safe to clear tool layer
+		toolLayer.Clear ();
+		toolLayer.Hidden = true;
+
+		last_point = null;
 
 		base.OnMouseUp (document, e);
 
-		active_brush?.DoMouseUp ();
+		// Force a canvas redraw immediately to display committed pixels
+		document.Workspace.Invalidate ();
 	}
+
 
 	protected override void OnSaveSettings (ISettingsService settings)
 	{

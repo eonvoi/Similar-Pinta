@@ -695,7 +695,7 @@ msgstr "Allalaadimise suurus: {0}"
 msgid "Duplicate Layer"
 msgstr "Kihi dubleerimine"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Loo ja muuda pilte kergesti"
@@ -1041,7 +1041,7 @@ msgstr "Kui Sa ei salvesta, siis lähevad kõik muudatused jäädavalt kaotsi."
 msgid "Image"
 msgstr "Pilt"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Pildiredaktor"
 
@@ -1704,7 +1704,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1718,7 +1718,7 @@ msgstr ""
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta pildiredaktor"
 
@@ -1730,7 +1730,7 @@ msgstr "Pinta veebisait"
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2719,7 +2719,7 @@ msgstr "_Aken"
 msgid "by Pinta contributors"
 msgstr "Pinta kaastöötajad"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 

@@ -702,7 +702,7 @@ msgstr "Deskarga-tamaina: {0}"
 msgid "Duplicate Layer"
 msgstr "Bikoiztu geruza"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Easily create and edit images"
@@ -1050,7 +1050,7 @@ msgstr "Gordetzen ez baduzu, aldaketa guztiak betiko galduko dira."
 msgid "Image"
 msgstr "Irudia"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Image Editor"
 
@@ -1770,7 +1770,7 @@ msgstr ""
 "Itzultzaileak: Ekilore-haziak antolatzen diren moduaren antzeko puntu-"
 "antolamendua"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1784,7 +1784,7 @@ msgstr "Pinta komunitatearen gehigarriak - Plataformako-Zeharkakoak"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta komunitatearen gehigarriak - Plataformako-Berariazkoak"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Image Editor"
 
@@ -1796,7 +1796,7 @@ msgstr "Pinta-ren webgunea"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pintak ez du onartzen fitxategi-formatu horretako irudiak gordetzerik."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2800,7 +2800,7 @@ msgstr "Lei_hoa"
 msgid "by Pinta contributors"
 msgstr "Pintaren garatzaileak"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "marraztu;marrazkia;margotu;margoa;grafikoak;rasterra;2d;"
 

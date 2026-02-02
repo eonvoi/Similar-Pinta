@@ -702,7 +702,7 @@ msgstr "Downloadgrootte: {0}"
 msgid "Duplicate Layer"
 msgstr "Laag dupliceren"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Eenvoudig afbeeldingen maken en bewerken"
@@ -1050,7 +1050,7 @@ msgstr "Als u het bestand niet opslaat, gaan alle aanpassingen verlopen."
 msgid "Image"
 msgstr "Afbeelding"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Afbeeldingsbewerker"
 
@@ -1767,7 +1767,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr "Bladstand"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1781,7 +1781,7 @@ msgstr "Pinta-gemeenschapsuitbreidingen (platform-onafhankelijk)"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta-gemeenschapsuitbreidingen (platform-specifiek)"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta-afbeeldingsbewerker"
 
@@ -1794,7 +1794,7 @@ msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Pinta heeft geen ondersteuning voor het opslaan in dit bestandsformaat."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2799,7 +2799,7 @@ msgstr "_Venster"
 msgid "by Pinta contributors"
 msgstr "door Pinta-bijdragers"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "tekenen;tekening;schilderen;schilderij;grafiek;rooster;raster;2d;"
 

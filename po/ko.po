@@ -701,7 +701,7 @@ msgstr "다운로드 크기: {0}"
 msgid "Duplicate Layer"
 msgstr "레이어 복제"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "이미지를 쉽게 생성하고 편집할 수 있습니다"
@@ -1048,7 +1048,7 @@ msgstr "저장하지 않으면 모든 변경 사항이 영구적으로 사라집
 msgid "Image"
 msgstr "이미지"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "이미지 편집기"
 
@@ -1761,7 +1761,7 @@ msgstr "사진"
 msgid "Phyllotaxis"
 msgstr "엽서 배열"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1775,7 +1775,7 @@ msgstr "Pinta 커뮤니티 애드인 - 크로스 플랫폼"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta 커뮤니티 애드인 - 플랫폼별"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta 이미지 편집기"
 
@@ -1787,7 +1787,7 @@ msgstr "Pinta 웹사이트"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta는 해당 형식의 이미지 파일을 지원하지 않습니다."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2784,7 +2784,7 @@ msgstr "창(_W)"
 msgid "by Pinta contributors"
 msgstr "Pinta 기여자"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "그리기;그림;페인트;회화;그래픽;래스터;2D;"
 

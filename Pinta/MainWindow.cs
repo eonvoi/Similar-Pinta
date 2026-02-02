@@ -42,8 +42,11 @@ internal sealed class MainWindow
 	Dock dock = null!;
 	Gio.Menu menu_bar = null!;
 	Gio.Menu image_menu = null!;
+	Gio.Menu layers_menu = null!;
+	Gio.Menu help_menu = null!;
 	Gio.Menu view_menu = null!;
-
+	Gio.Menu edit_menu = null!;
+	Gio.Menu file_menu = null!;
 	CanvasPad canvas_pad = null!;
 
 	private int main_thread_id = -1;
@@ -54,7 +57,7 @@ internal sealed class MainWindow
 		this.app = app;
 
 		// Set the human-readable application name, used by e.g. gtk_recent_manager_add_item().
-		GLib.Functions.SetApplicationName (Translations.GetString ("Pinta"));
+		GLib.Functions.SetApplicationName (Translations.GetString ("Familiar Pinta"));
 	}
 
 	/// <summary>
@@ -167,7 +170,7 @@ internal sealed class MainWindow
 
 		int index = PintaCore.Workspace.OpenDocuments.IndexOf (view.Document);
 		PintaCore.Workspace.SetActiveDocument (index);
-		((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
+		((CanvasWindow) view.Widget).PintaCanvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 	}
 
 	private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
@@ -177,17 +180,17 @@ internal sealed class MainWindow
 		var notebook = canvas_pad.Notebook;
 		int selected_index = notebook.ActiveItemIndex;
 
-		CanvasWindow canvas = new (
+		CanvasWindow canvasWindow = new (
 			PintaCore.Chrome,
 			PintaCore.Tools,
 			doc, PintaCore.CanvasGrid) {
 			RulersVisible = PintaCore.Actions.View.Rulers.Value,
 			RulerMetric = GetCurrentRulerMetric ()
 		};
-		doc.Workspace.CanvasWindow = canvas;
-		doc.Workspace.Canvas = canvas.Canvas;
+		doc.Workspace.CanvasWindow = canvasWindow;
+		doc.Workspace.PintaCanvas = canvasWindow.PintaCanvas;
 
-		DocumentViewContent my_content = new (doc, canvas);
+		DocumentViewContent my_content = new (doc, canvasWindow);
 
 		// Insert our tab to the right of the currently selected tab
 		notebook.InsertTab (my_content, selected_index + 1);
@@ -200,7 +203,7 @@ internal sealed class MainWindow
 
 		bool canvasHasBeenShown = false;
 
-		Gtk.Viewport view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
+		Gtk.Viewport view = (Gtk.Viewport) doc.Workspace.PintaCanvas.Parent!;
 		view.Hadjustment!.OnChanged += (o, e2) => {
 			if (canvasHasBeenShown)
 				return;
@@ -217,10 +220,10 @@ internal sealed class MainWindow
 			canvasHasBeenShown = true;
 		};
 
-		PintaCore.Actions.View.Rulers.Toggled += (active, _) => { canvas.RulersVisible = active; };
+		PintaCore.Actions.View.Rulers.Toggled += (active, _) => { canvasWindow.RulersVisible = active; };
 		PintaCore.Actions.View.RulerMetric.OnActivate += (o, args) => {
 			PintaCore.Actions.View.RulerMetric.ChangeState (args.Parameter!);
-			canvas.RulerMetric = GetCurrentRulerMetric ();
+			canvasWindow.RulerMetric = GetCurrentRulerMetric ();
 		};
 	}
 
@@ -318,7 +321,7 @@ internal sealed class MainWindow
 				extension.Initialize ();
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
-				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
+				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Familiar Pinta", args.ExtensionNode.Addin.Id);
 				_ = PintaCore.Chrome.ShowErrorDialog (
 					PintaCore.Chrome.MainWindow,
 					Translations.GetString ("Failed to initialize add-in"),
@@ -341,15 +344,15 @@ internal sealed class MainWindow
 
 		window_shell = new WindowShell (
 			app,
-			"Pinta.GenericWindow",
-			"Pinta",
+			"FamiliarPinta.GenericWindow",
+			"Familiar Pinta",
 			width,
 			height,
 			useMenuBar: IsUsingMenuBar (),
 			maximize);
 
 		CreateMainToolBar ();
-		CreateToolToolBar ();
+		CreateToolOptionsAndNameBar ();
 
 		CreatePanels ();
 		CreateStatusBar ();
@@ -391,20 +394,22 @@ internal sealed class MainWindow
 		viewMenu.AppendSection (null, padSection);
 
 		Gio.Menu menuBar = Gio.Menu.New ();
-		menuBar.AppendSubmenu (Translations.GetString ("_File"), fileMenu);
-		menuBar.AppendSubmenu (Translations.GetString ("_Edit"), editMenu);
+		// File, Edit and Layers were moved to the left of the header
+		//menuBar.AppendSubmenu (Translations.GetString ("_File"), fileMenu);
+		//menuBar.AppendSubmenu (Translations.GetString ("_Edit"), editMenu);
 		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_View"), viewMenu);
 			menuBar.AppendSubmenu (Translations.GetString ("_Image"), imageMenu);
 		}
-		menuBar.AppendSubmenu (Translations.GetString ("_Layers"), layersMenu);
+		//menuBar.AppendSubmenu (Translations.GetString ("_Layers"), layersMenu);
 		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_Adjustments"), adjustmentsMenu);
 			menuBar.AppendSubmenu (Translations.GetString ("Effe_cts"), effectsMenu);
 		}
 		menuBar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addinsMenu);
 		menuBar.AppendSubmenu (Translations.GetString ("_Window"), windowMenu);
-		menuBar.AppendSubmenu (Translations.GetString ("_Help"), helpMenu);
+		// Help menu is now accessible with another button than the menu button
+		//menuBar.AppendSubmenu (Translations.GetString ("_Help"), helpMenu);
 
 		// --- Global initializations
 
@@ -433,60 +438,96 @@ internal sealed class MainWindow
 		image_menu = imageMenu;
 		menu_bar = menuBar;
 		view_menu = viewMenu;
+		edit_menu = editMenu;
+		file_menu = fileMenu;
+		layers_menu = layersMenu;
+		help_menu = helpMenu;
 	}
 
 	private void CreateMainToolBar ()
 	{
 		if (window_shell.HeaderBar is not null) {
 			var header_bar = window_shell.HeaderBar;
+			var tool_info_bar = window_shell.CreateToolInfoBarBox("tool_info_bar");
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = this.file_menu,
+				IconName = Resources.StandardIcons.DocumentRevert,
+				Label = Translations.GetString ("File"),
+			});
+
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = this.edit_menu,
+				IconName = Resources.StandardIcons.ViewReveal,
+				Label = Translations.GetString ("Edit"),
+			});
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = this.view_menu,
+				IconName = Resources.StandardIcons.ViewReveal,
+				Label = Translations.GetString ("View"),
+			});
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = this.image_menu,
+				IconName = Resources.StandardIcons.ImageGeneric,
+				Label = Translations.GetString ("Image"),
+			});
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = this.layers_menu,
+				IconName = Resources.StandardIcons.ImageGeneric,
+				Label = Translations.GetString ("Layers"),
+			});
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
+				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
+				Label = Translations.GetString ("Adjustments"),
+			});
+
+			header_bar.PackStart (new Gtk.MenuButton () {
+				MenuModel = PintaCore.Chrome.EffectsMenu,
+				IconName = Resources.Icons.EffectsDefault,
+				Label = Translations.GetString ("Effects"),
+			});
+
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = this.help_menu,
+				IconName = Resources.StandardIcons.HelpAbout,
+				TooltipText = Translations.GetString ("Help"),
+			});
+
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = this.menu_bar,
 				IconName = Resources.StandardIcons.OpenMenu,
 				TooltipText = Translations.GetString ("Main Menu"),
 			});
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.EffectsMenu,
-				IconName = Resources.Icons.EffectsDefault,
-				TooltipText = Translations.GetString ("Effects"),
-			});
-
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
-				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
-				TooltipText = Translations.GetString ("Adjustments"),
-			});
-
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.image_menu,
-				IconName = Resources.StandardIcons.ImageGeneric,
-				TooltipText = Translations.GetString ("Image"),
-			});
-
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.view_menu,
-				IconName = Resources.StandardIcons.ViewReveal,
-				TooltipText = Translations.GetString ("View"),
-			});
-
-			PintaCore.Actions.CreateHeaderToolBar (header_bar);
+			// File, Open, Save, Undo, Redo, Cut, Copy, Paste, CropToSelection, Deselect All
+			PintaCore.Actions.CreateActionsBarFromBox (tool_info_bar);
 		} else {
-			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
-			PintaCore.Actions.CreateToolBar (main_toolbar);
+			// if window_shell.HeaderBar is null
+			// create a new tool info bar. it gets appended to shell_layout
+			var current_tool_info_toolbar = window_shell.CreateCurrentToolInfoBar ("main_toolbar");
+
+			// New, Open, Save, Print, Cut, Copy, Paste, CropToSelection, Deselect, Undo, Redo
+			PintaCore.Actions.CreateActionsBarFromBox (current_tool_info_toolbar);
 		}
 	}
 
-	private void CreateToolToolBar ()
+	private void CreateToolOptionsAndNameBar ()
 	{
-		Gtk.Box tool_toolbar = window_shell.CreateToolBar ("tool_toolbar");
-		tool_toolbar.HeightRequest = 48;
+		Gtk.Box temp_toolOptionsAndNameBar = window_shell.CreateCurrentToolInfoBar ("tool_toolbar");
+		temp_toolOptionsAndNameBar.HeightRequest = 48;
 
-		PintaCore.Chrome.InitializeToolToolBar (tool_toolbar);
+		PintaCore.Chrome.InitializeToolOptionsAndNameBar (temp_toolOptionsAndNameBar);
 	}
 
 	private void CreateStatusBar ()
 	{
-		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
+		Gtk.Box statusbar = window_shell.CreateColorSwatchBar ("statusbar");
 
 		statusbar.Append (
 			new StatusBarColorPaletteWidget (
@@ -526,6 +567,8 @@ internal sealed class MainWindow
 		};
 		container.Append (toolbox_scroll);
 		PintaCore.Chrome.InitializeToolBox (toolbox);
+
+		// everything below is canvas, history and layers
 
 		// Dock widget
 		dock = new Dock {
@@ -645,7 +688,7 @@ internal sealed class MainWindow
 			int image_x = PintaCore.Workspace.ImageSize.Width;
 			int image_y = PintaCore.Workspace.ImageSize.Height;
 
-			var canvas_viewport = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
+			var canvas_viewport = PintaCore.Workspace.ActiveWorkspace.PintaCanvas.Parent!;
 
 			int window_x = canvas_viewport.GetAllocatedWidth ();
 			int window_y = canvas_viewport.GetAllocatedHeight ();

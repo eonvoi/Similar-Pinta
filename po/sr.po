@@ -694,7 +694,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Удвостручи слој"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "С лакоћом правите и уређујте слике"
@@ -1042,7 +1042,7 @@ msgstr "Уколико не сачувате, све измене ће бити 
 msgid "Image"
 msgstr "Слика"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Уређивач слика"
 
@@ -1716,7 +1716,7 @@ msgstr "Фотографија"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1730,7 +1730,7 @@ msgstr "Додаци Пинтине заједнице — за све плат�
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Додаци Пинтине заједнице — за посебну платформу"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Уређивач слика Пинта"
 
@@ -1742,7 +1742,7 @@ msgstr "Веб сајт Пинте"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Пинта не подржава чување слика у овом запису."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2737,7 +2737,7 @@ msgstr "_Прозор"
 msgid "by Pinta contributors"
 msgstr "доприносиоци Пинте"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "цртај;цртање;цртеж;цртање;графика;2д;draw;drawing;paint;painting;graphics;raster;2d;"
 

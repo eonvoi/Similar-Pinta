@@ -694,7 +694,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Duplikovať vrstvu"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Jednoduchá tvorba a úprava obrázkov"
@@ -1042,7 +1042,7 @@ msgstr "Ak neuložíte, všetky zmeny budú navždy stratené."
 msgid "Image"
 msgstr "Obrázok"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Editor obrázkov"
 
@@ -1715,7 +1715,7 @@ msgstr "Fotka"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1729,7 +1729,7 @@ msgstr "Pinta komunitné prídavné moduly - Multi-Platformné"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta komunitné prídavné moduly - Špecifické pre platformu"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta editor obrázkov"
 
@@ -1741,7 +1741,7 @@ msgstr "Web projektu Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta nepodporuje ukladanie obrázkov do tohto typu súboru."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2739,7 +2739,7 @@ msgstr "_Okno"
 msgid "by Pinta contributors"
 msgstr "prispievatelia projektu Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "kresliť;kreslenie;maľovať;maľovanie;grafika;raster;2d"
 

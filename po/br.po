@@ -694,7 +694,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Eilañ an dreuzfollenn"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Krouiñ ha kempenn skeudennoù ent aes"
@@ -1042,7 +1042,7 @@ msgstr "Ma ne enrollot ket e vo kollet an holl gemmoù da vat."
 msgid "Image"
 msgstr "Skeudenn"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Embanner skeudennoù"
 
@@ -1717,7 +1717,7 @@ msgstr "Luc'hskeudenn"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1731,7 +1731,7 @@ msgstr "Askouezhioù kumuniezh Pinta - Arveret gant meur a savenn"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Askouezhioù kumuniezh Pinta - Arbennik evit pep savenn"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Embanner skeudennoù"
 
@@ -1743,7 +1743,7 @@ msgstr "Lec'hienn Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta ne skor ket an enrollañ skeudennoù gant ar mentrezh restr-mañ."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2734,7 +2734,7 @@ msgstr "_Prenestr"
 msgid "by Pinta contributors"
 msgstr "gant perzhiaded Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 

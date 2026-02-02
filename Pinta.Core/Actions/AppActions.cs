@@ -44,7 +44,7 @@ public sealed class AppActions
 			Resources.StandardIcons.HelpAbout);
 		Exit = new Command (
 			"quit",
-			Translations.GetString ("Quit"),
+			Translations.GetString ("Exit"),
 			null,
 			Resources.StandardIcons.ApplicationExit,
 			shortcuts: ["<Primary>Q"]);

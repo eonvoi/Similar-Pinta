@@ -702,7 +702,7 @@ msgstr "Tamaño de la descarga: {0}"
 msgid "Duplicate Layer"
 msgstr "Duplicar la capa"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Cree y edite imágenes fácilmente"
@@ -1051,7 +1051,7 @@ msgstr "Si no guarda los cambios, se perderán permanentemente."
 msgid "Image"
 msgstr "Imagen"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Editor de imágenes"
 
@@ -1777,7 +1777,7 @@ msgstr "Fotografía"
 msgid "Phyllotaxis"
 msgstr "Filotaxis"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1791,7 +1791,7 @@ msgstr "Complementos comunitarios de Pinta: multiplataforma"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Complementos comunitarios de Pinta: específicos de la plataforma"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editor de imágenes Pinta"
 
@@ -1803,7 +1803,7 @@ msgstr "Sitio web de Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta no permite guardar imágenes en este formato de archivo."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2807,7 +2807,7 @@ msgstr "Ve_ntana"
 msgid "by Pinta contributors"
 msgstr "de los colaboradores de Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "dibujar;dibujo;pintar;pintura;gráficos;trama;2d;"
 

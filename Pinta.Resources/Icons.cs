@@ -185,19 +185,19 @@ public static class Icons
 	public const string OrientationPortrait = "image-orientation-portrait-symbolic";
 	public const string OrientationLandscape = "image-orientation-landscape-symbolic";
 
-	public const string LayerDelete = "layers-remove-layer-symbolic";
-	public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
+	public const string LayerDelete = "window-close-symbolic";//"layers-remove-layer-symbolic";
+	public const string LayerDuplicate = "edit-copy";//"layers-duplicate-layer-symbolic";
 	public const string LayerFlipHorizontal = ImageFlipHorizontal;
 	public const string LayerFlipVertical = ImageFlipVertical;
 	public const string LayerImport = "layer-import";
-	public const string LayerMergeDown = "layers-merge-down-symbolic";
-	public const string LayerMoveDown = "layers-move-layer-down-symbolic";
-	public const string LayerMoveUp = "layers-move-layer-up-symbolic";
-	public const string LayerNew = "layers-add-layer-symbolic";
+	public const string LayerMergeDown = "go-bottom";//"layers-merge-down-symbolic";
+	public const string LayerMoveDown = "go-down";//"layers-move-layer-down-symbolic";
+	public const string LayerMoveUp = "go-up";//"layers-move-layer-up-symbolic";
+	public const string LayerNew = "list-add";//"layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
 	public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";
 
-	public const string Pinta = "com.github.PintaProject.Pinta";
+	public const string FamiliarPinta = "com.github.eonvoi.FamiliarPinta";
 
 	public const string ResizeCanvasBase = "image-resize-canvas-base-symbolic";
 	public const string ResizeCanvasDown = "image-resize-canvas-down-symbolic";
@@ -216,7 +216,7 @@ public static class Icons
 	public const string Sampling9 = "tool-colorpicker-sampling-9x9-symbolic";
 
 	public const string ToolCloneStamp = "tool-clonestamp-symbolic";
-	public const string ToolColorPicker = "tool-colorpicker-symbolic";
+	public const string ToolColorPicker = "color-select-symbolic";//"tool-colorpicker-symbolic";
 	public const string ToolColorPickerPreviousTool = "go-previous-symbolic";
 	public const string ToolEllipse = "tool-ellipse-symbolic";
 	public const string ToolEraser = "tool-eraser-symbolic";

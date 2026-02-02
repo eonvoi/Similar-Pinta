@@ -257,6 +257,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		//Now the Document has been saved to the file it's associated with in this session.
 		document.HasBeenSavedInSession = true;
 
+		RecentlyOpenedFilesManager.TryAddRecentFile(document.File.GetPath());
 		return true;
 	}
 

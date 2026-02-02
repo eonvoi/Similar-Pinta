@@ -166,17 +166,6 @@ public sealed class LayerActions
 			MoveLayerUp]);
 	}
 
-	public void CreateLayerWindowToolBar (Gtk.Box toolbar)
-	{
-		toolbar.Append (AddNewLayer.CreateToolBarItem ());
-		toolbar.Append (DeleteLayer.CreateToolBarItem ());
-		toolbar.Append (DuplicateLayer.CreateToolBarItem ());
-		toolbar.Append (MergeLayerDown.CreateToolBarItem ());
-		toolbar.Append (MoveLayerUp.CreateToolBarItem ());
-		toolbar.Append (MoveLayerDown.CreateToolBarItem ());
-		toolbar.Append (Properties.CreateToolBarItem ());
-	}
-
 	public void RegisterHandlers ()
 	{
 		AddNewLayer.Activated += HandlePintaCoreActionsLayersAddNewLayerActivated;

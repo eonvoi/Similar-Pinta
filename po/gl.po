@@ -698,7 +698,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Duplicar a capa"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Cree e edite imaxes fácilmente"
@@ -1046,7 +1046,7 @@ msgstr "Se non garda, todos os cambios realizados perderanse."
 msgid "Image"
 msgstr "Imaxe"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Editor de imaxes"
 
@@ -1722,7 +1722,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1736,7 +1736,7 @@ msgstr "Complementos da comunidade de Pinta: multiplataforma"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Complementos da comunidade de Pinta: para plataformas específicas"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editor de imaxes Pinta"
 
@@ -1748,7 +1748,7 @@ msgstr "Sitio web do Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta non permite gardar imaxes neste formato."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2746,7 +2746,7 @@ msgstr "_Xanela"
 msgid "by Pinta contributors"
 msgstr "Polos colaboradores de Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "debuxar;debuxo;pintar;pintura;gráficos;raster;2d;"
 

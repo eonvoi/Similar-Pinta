@@ -1,26 +1,42 @@
+> [!CAUTION]
+> # This is a MODIFIED version!<br>
+> **This is NOT original Pinta.**<br>
+> If you want to install the original, go to https://github.com/PintaProject/Pinta instead!
 
-# Pinta - [Simple Gtk# Paint Program](http://pinta-project.com/)
+> [!NOTE]
+> Use at your own risk.<br>
+> A good general rule is not to run any software if you don't trust its author.<br>
+> You must build from source, I won't provide binaries for this project.
 
-<a href='https://flathub.org/apps/com.github.PintaProject.Pinta'><img width='200' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/pinta)
+### Here's how my modified version looks:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/40637769-637b-4260-a34c-6634a5022c7a" />
 
-[![Translation status](https://hosted.weblate.org/widget/pinta/pinta/287x66-grey.png)](https://hosted.weblate.org/engage/pinta/)
-[![Build Status](https://github.com/PintaProject/Pinta/workflows/Build/badge.svg)](https://github.com/PintaProject/Pinta/actions)
+### Changes made
+Generally, I'm trying to make this fork's layout as similar to Paint.NET as possible.<br>
+I know for a fact my code would never get accepted into the original project, but nevertheless:
+- The `Tooblox` is now 2 columns wide, just like Paint.NET
+- The Tools inside the `Toolbox` were re-ordered to match that of Paint.NET 5.1.11
+- Reorganized menus and submenus
+  - Moved "File", "Edit" and "Layers" from the `Menu Button`'s popup directly next to "View, Image, ...", in the header
+  - Moved "File, Edit, View, Image, ..." to the left, and replaced their icons with labels instead, just like Paint.NET does
+  - The "Help" section was separated from the `Menu Button`'s popup into its own button that sits next to the `Menu Button` (just like Paint.NET does)
+  - Duplicated "Save All" from "`Menu Button` > Window > Save All" into "File > Save All" (because Paint.NET displays "Save All" under "Save As")
+- Added missing "File > Open Recent" functionality (the list updates when you save or open a file successfuly)
+- Added a "Layer Properties" button to the `LayersListViewItemWidget`, now you don't have to double-click the layer widget to open up its properties
+- Fixed an annoyance where, when you clicked outside the canvas with the `Rectangle Select` tool, it would select a 0x0 area instead of de-selecting
+- Fixed a bug where when dragging the `Color Pickers` really fast would crash the whole app
+- Fixed a visual bug where, when using the `Paintbrush` tool, the blend mode of a layer wouldn't be visible to the user until the canvas was invalidated and redrawn
+- Simplified `Shape Type` names to be more intuitive to the user
+- *Reformatted some code / changed variable names for readibility*
+- ***(From a WIP PR in the original repo, I'm not the one who implemented this):*** Upgraded the transform tool to be able to accurately transform the selected pixels
+- ***(From a PR in the original repo, I'm not the one who implemented this):*** The text tool's font family and font size are now 2 separate UI elements
 
-Copyright (C) 2010 Jonathan Pobst <monkey AT jpobst DOT com>
-
-Pinta is a GTK clone of [Paint.Net 3.0](http://www.getpaint.net/), with support for Linux, Windows, and macOS.
-
-Original Pinta code is licensed under the MIT License:
-See `license-mit.txt` for the MIT License
-
-Code from Paint.Net 3.36 is used under the MIT License and retains the
-original headers on source files.
-
-See `license-pdn.txt` for Paint.Net's original license.
-
+> Note that some localization is broken and I won't fix it.
 
 ## Icons are from:
+> [!NOTE]
+> (Editor's note)<br>
+> (this is from the original repo, i did not add any new 3rd party icons)
 
 - [Paint.Net 3.0](http://www.getpaint.net/)
 Used under [MIT License](http://www.opensource.org/licenses/mit-license.php)
@@ -35,6 +51,9 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 (see `Pinta.Resources/icons/pinta-icons.md` for the list of such icons)
 
 ## Building on Windows
+> [!NOTE]
+> (Editor's note)<br>
+> (this is from the original repo, build instructions should be the same as for the original)
 
 First, install the required GTK-related dependencies:
 - Install [MSYS2](https://www.msys2.org)
@@ -69,31 +88,33 @@ For building on the command line:
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev`
   - Minimum library versions: `gtk` >= 4.18 and `libadwaita` >= 1.7
   - Optional dependencies: `webp-pixbuf-loader`
+
+> [!NOTE]
+> (Editor's note)<br>
+> On Fedora Linux or Nobara Linux, you can download dependencies like so:
+> ```
+> sudo dnf install autoconf automake libtool autoconf-archive gettext intltool libadwaita-devel
+> ```
+ 
 - Build (option 1, for development and testing):
   - `dotnet build`
   - `dotnet run --project Pinta`
-- Build (option 2, for installation):
-  - `./autogen.sh`
-    - If building from a tarball, run `./configure` instead.
-    - Add the `--prefix=<install directory>` argument to install to a directory other than `/usr/local`.
-  - `make install`
+- ~~- Build (option 2, for installation):~~ (`make install` is broken, probably because i had lazily changed the app id, probably won't fix) <br> 
+  - ~~`./autogen.sh`~~ <br>
+  - ~~If building from a tarball, run `./configure` instead.~~ <br>
+  - ~~Add the `--prefix=<install directory>` argument to install to a directory other than `/usr/local`.~~ <br>
+  - ~~`make install`~~
 
 ## Building and Debugging in Docker
+> [!NOTE]
+> (Editor's note)<br>
+> I personally don't use Docker, but this section was included in the original repo, so I'm keeping it
 
 Follow the instructions of the corresponding [pinta-virtual-dev-environment](https://github.com/janrothkegel/pinta-virtual-dev-environment) project
 
 ## Getting help / contributing:
 
-- You can get [technical help](https://github.com/PintaProject/Pinta/discussions).
-- You can report [bugs/issues](https://github.com/PintaProject/Pinta/issues).
-- You can make [suggestions](https://github.com/PintaProject/Pinta/discussions/categories/ideas).
-- You can help [translate Pinta to your native language](https://hosted.weblate.org/engage/pinta/).
-- You can fork the project on [Github](https://github.com/PintaProject/Pinta).
-- You can get help in #pinta on irc.gnome.org.
-- For details on notable changes of each release, take a look at the [CHANGELOG](https://github.com/PintaProject/Pinta/blob/master/CHANGELOG.md).
-- For details on patching, take a look at `patch-guidelines.md` in the repo.
+This is a fork, I won't be accepting any bug or feature requests
 
-## Code signing policy
-- Free code signing on Windows provided by [SignPath.io](https://about.signpath.io/), certificate by [SignPath Foundation](https://signpath.org/).
-- Committers and approvers: [Pinta Maintainers](https://github.com/orgs/PintaProject/people)
-- Privacy policy: this program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
+## Code quality
+This is a fork, code quality checks are lesser, and there are no official approvers for this fork

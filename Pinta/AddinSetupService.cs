@@ -56,6 +56,7 @@ public sealed class AddinSetupService : SetupService
 		return Repositories.ContainsRepository (url);
 	}
 
+	// register plugins / addins
 	public void RegisterRepositories (bool enable)
 	{
 		RegisterRepository (GetPlatformRepositoryUrl (),

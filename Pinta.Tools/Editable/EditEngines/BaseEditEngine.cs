@@ -330,10 +330,10 @@ public abstract class BaseEditEngine
 		if (shape_type_button == null) {
 			shape_type_button = new ToolBarDropDownButton ();
 
-			shape_type_button.AddItem (Translations.GetString ("Open Line/Curve Series"), Resources.Icons.ToolLine, 0);
-			shape_type_button.AddItem (Translations.GetString ("Closed Line/Curve Series"), Resources.Icons.ToolRectangle, 1);
+			shape_type_button.AddItem (Translations.GetString ("Line"), Resources.Icons.ToolLine, 0);
+			shape_type_button.AddItem (Translations.GetString ("Rectangle"), Resources.Icons.ToolRectangle, 1);
 			shape_type_button.AddItem (Translations.GetString ("Ellipse"), Resources.Icons.ToolEllipse, 2);
-			shape_type_button.AddItem (Translations.GetString ("Rounded Line Series"), Resources.Icons.ToolRectangleRounded, 3);
+			shape_type_button.AddItem (Translations.GetString ("Rounded Rectangle"), Resources.Icons.ToolRectangleRounded, 3);
 
 			shape_type_button.SelectedIndex = settings.GetSetting (
 				SettingNames.ShapeType (toolPrefix),
@@ -1523,14 +1523,15 @@ public abstract class BaseEditEngine
 
 		//The active tool needs to be switched to the corresponding tool.
 		PintaCore.Tools.SetCurrentTool (correspondingTool);
+		//Console.WriteLine($"BaseEditEngine.ActivateCorrespondingTool: {correspondingTool.Name} set!");
 		var newTool = (ShapeTool?) PintaCore.Tools.CurrentTool;
 
 		// This shouldn't be possible, but we need a null check.
-		if (newTool is null)
+		if (newTool is null || oldTool is null)
 			return null;
 
 		//What happens next depends on whether the old tool was an editable ShapeTool.
-		if (oldTool != null && oldTool.IsEditableShapeTool) {
+		if (oldTool.IsEditableShapeTool) {
 
 			if (permanentSwitch) {
 				//Set the new tool's active shape and point to the old shape and point.

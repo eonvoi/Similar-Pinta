@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2026-02-01 15:32+0000\n"
-"Last-Translator: Cas Pascal <casboi86@gmail.com>\n"
+"PO-Revision-Date: 2025-12-31 18:06+0000\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/pinta/pinta/"
 "vi/>\n"
 "Language: vi\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -702,7 +702,7 @@ msgstr "Kích thước tải xuống: {0}"
 msgid "Duplicate Layer"
 msgstr "Nhân đôi lớp"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Dễ dàng tạo và chỉnh sửa hình ảnh"
@@ -1049,7 +1049,7 @@ msgstr "Nếu bạn không lưu lại, tất cả những thay đổi sẽ vĩnh
 msgid "Image"
 msgstr "Hình ảnh"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Trình biên soạn ảnh"
 
@@ -1756,7 +1756,7 @@ msgstr "Ảnh"
 msgid "Phyllotaxis"
 msgstr "Phyllotaxis"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1770,7 +1770,7 @@ msgstr "Phần mở rộng của cộng đồng Pinta - Đa nền tảng"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Phần mở rộng của cộng đồng Pinta - Tùy thuộc nền tảng"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Trình xử lý ảnh Pinta"
 
@@ -1782,7 +1782,7 @@ msgstr "Trang web của Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta không hỗ trợ lưu hình ảnh dưới định dạng này."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2032,7 +2032,7 @@ msgstr "Phát hành theo giấy phép MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
-msgstr "Vát cạnh"
+msgstr "Sự cứu tế"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
 msgid "Rename Layer"
@@ -2362,7 +2362,7 @@ msgstr "Bị mắc kẹt"
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
-msgstr "Tạo kiểu"
+msgstr "Cách điệu"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Switch to Pencil tool"
@@ -2770,7 +2770,7 @@ msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr "_Lưu"
+msgstr "_Cứu"
 
 #: ../Pinta/MainWindow.cs:397
 msgid "_View"
@@ -2784,7 +2784,7 @@ msgstr "Cử_a sổ"
 msgid "by Pinta contributors"
 msgstr "bởi nhóm đóng góp cho Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "draw;drawing;paint;painting;graphics;raster;2d;"
 

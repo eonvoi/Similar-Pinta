@@ -701,7 +701,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Gandakan Lapisan"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Mudahnya membuat dan menyunting gambar"
@@ -1049,7 +1049,7 @@ msgstr "Bila Anda tidak simpan, semua perubahan akan hilang."
 msgid "Image"
 msgstr "Gambar"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Penyunting Gambar"
 
@@ -1759,7 +1759,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1773,7 +1773,7 @@ msgstr "Addin Komunitas Pinta - Lintas Platform"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Addin Komunitas Pinta - Platform Spesifik"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Penyunting Gambar"
 
@@ -1785,7 +1785,7 @@ msgstr "Laman Web Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta tidak dapat menyimpan gambar dalam format ini"
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2784,7 +2784,7 @@ msgstr "_Jendela"
 msgid "by Pinta contributors"
 msgstr "oleh kontributor Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "gambar,menggambar,cat,mencat,grafik,raster;2d;"
 

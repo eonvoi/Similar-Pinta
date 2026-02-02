@@ -50,7 +50,7 @@ public sealed class CanvasWindow : Gtk.Grid
 	private const double ZOOM_THRESHOLD_SCROLL = 1.25;
 	private const double ZOOM_THRESHOLD_PINCH = 0.15;
 
-	public PintaCanvas Canvas { get; }
+	public PintaCanvas PintaCanvas { get; }
 
 	public CanvasWindow (
 		ChromeManager chrome,
@@ -131,7 +131,7 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		// --- References to keep
 
-		Canvas = canvas;
+		PintaCanvas = canvas;
 
 		this.chrome = chrome;
 		this.tools = tools;
@@ -185,7 +185,7 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		// These coordinates are relative to our grid widget, so transform into the child image
 		// view's coordinates, and then to the canvas coordinates.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPos);
+		this.TranslateCoordinates (PintaCanvas, rootPoint, out PointD viewPos);
 
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPos);
 		horizontal_ruler.Position = current_canvas_pos.X;
@@ -355,7 +355,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		// Send the mouse press event to the current tool.
 		// Translate coordinates to the canvas widget.
 		PointD rootPoint = new (args.StartX, args.StartY);
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		this.TranslateCoordinates (PintaCanvas, rootPoint, out PointD viewPoint);
 		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
 
 		ToolMouseEventArgs tool_args = new () {
@@ -375,7 +375,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
 
 		// Translate coordinates to the canvas widget.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		this.TranslateCoordinates (PintaCanvas, rootPoint, out PointD viewPoint);
 
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPoint);
 		if (document.Workspace.PointInCanvas (current_canvas_pos))
@@ -399,7 +399,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
 
 		// Translate coordinates to the canvas widget.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		this.TranslateCoordinates (PintaCanvas, rootPoint, out PointD viewPoint);
 		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Send the mouse release event to the current tool.

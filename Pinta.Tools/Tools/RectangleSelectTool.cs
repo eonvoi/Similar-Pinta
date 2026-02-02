@@ -44,6 +44,34 @@ public sealed class RectangleSelectTool : SelectTool
 	public override Gdk.Cursor DefaultCursor { get; }
 	public override int Priority => 13;
 
+	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
+	{
+		// outside bounds check, deselect if true 
+		var currentSelectionBounds = document.Selection.GetBounds ();
+		if ((currentSelectionBounds.Width < 1 || currentSelectionBounds.Height < 1)
+		&& (e.Point.X < 1 || e.Point.Y < 1 || e.Point.X > document.Workspace.ViewSize.Width || e.Point.Y > document.Workspace.ViewSize.Height)) {
+			handle.EndDrag ();
+
+			Document doc = document;
+
+			OnCommit (document);
+
+			SelectionHistoryItem hist = new (
+				PintaCore.Services.GetService<IWorkspaceService> (),
+				Pinta.Resources.Icons.EditSelectionNone,
+				Translations.GetString ("Deselect"));
+
+			hist.TakeSnapshot ();
+
+			doc.ResetSelectionPaths ();
+
+			doc.History.PushNewItem (hist);
+			doc.Workspace.Invalidate ();
+		} else {
+			base.OnMouseUp (document, e);
+		}
+	}
+
 	protected override void DrawShape (Document document, RectangleD r, Layer l)
 	{
 		document.Selection.CreateRectangleSelection (r);

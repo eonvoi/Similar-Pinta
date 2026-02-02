@@ -520,29 +520,30 @@ public static class UnaryPixelOps
 
 		public override ColorBgra Apply (in ColorBgra src_color)
 		{
-			//adjust saturation
+			// adjust saturation
 			byte intensity = src_color.GetIntensityByte ();
-			ColorBgra color = ColorBgra.FromBgra (
-				b: Utility.ClampToByte ((intensity * 1024 + (src_color.B - intensity) * sat_factor) >> 10),
-				g: Utility.ClampToByte ((intensity * 1024 + (src_color.G - intensity) * sat_factor) >> 10),
-				r: Utility.ClampToByte ((intensity * 1024 + (src_color.R - intensity) * sat_factor) >> 10),
-				a: src_color.A);
+			int baseIntensity = intensity << 10;
 
+			int b = Utility.ClampToByte (
+				(baseIntensity + (src_color.B - intensity) * sat_factor) >> 10);
+			int g = Utility.ClampToByte (
+				(baseIntensity + (src_color.G - intensity) * sat_factor) >> 10);
+			int r = Utility.ClampToByte (
+				(baseIntensity + (src_color.R - intensity) * sat_factor) >> 10);
+
+			ColorBgra color = ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, src_color.A);
+
+			// hue adjust
 			HsvColor hsvColor = HsvColor.FromBgra (color);
-			int newHue = (int) hsvColor.Hue;
 
-			newHue += hue_delta;
-
-			while (newHue < 0) { newHue += 360; }
-
-			while (newHue > 360) { newHue -= 360; }
+			int newHue = ((int) hsvColor.Hue + hue_delta) % 360;
+			if (newHue < 0)
+				newHue += 360;
 
 			ColorBgra newColor = (hsvColor with { Hue = newHue }).ToBgra ();
-			newColor = blend_op.Apply (newColor).NewAlpha (color.A);
 
-			return newColor;
+			return blend_op.Apply (newColor).NewAlpha (color.A);
 		}
-
 	}
 
 	[Serializable]

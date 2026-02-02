@@ -1,33 +1,45 @@
 using System.Linq;
 using Pinta.Core;
+using Gtk;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ToolBoxWidget : Gtk.FlowBox
+public sealed class ToolBoxWidget : Gtk.Grid
 {
-	private readonly ToolManager tools;
+    private readonly ToolManager tools;
+    private int nextIndex = 0; // tracks insertion order
+    private const int Columns = 2;
 
-	public ToolBoxWidget (ToolManager tools)
-	{
-		// --- Initialization (Gtk.FlowBox)
+    public ToolBoxWidget(ToolManager tools)
+    {
+        this.tools = tools;
 
-		SetOrientation (Gtk.Orientation.Vertical);
-		MinChildrenPerLine = 8; // Pinta 3 has 22 default tools, meaning a max of 3 columns regardless of size, smaller values don't lead to better use of visual space.
-		MaxChildrenPerLine = 1024; // Allow for single column if there's sufficient space to do so.
+        ColumnSpacing = 2;
+        RowSpacing = 2;
+        MarginStart = 3;
+        MarginEnd = 3;
+        // optional: align top-left
+        Halign = Align.Center;
+        Valign = Align.Start;
+    }
 
-		// --- References to keep
+    public void AddItem(BaseTool tool)
+    {
+        int row = nextIndex / Columns;
+        int col = nextIndex % Columns;
 
-		this.tools = tools;
-	}
+        Attach(tool.ToolItem, col, row, 1, 1);
 
-	public void AddItem (BaseTool tool)
-	{
-		var index = tools.ToList ().IndexOf (tool);
-		Insert (tool.ToolItem, index);
-	}
+        // optional: force square buttons
+        tool.ToolItem.WidthRequest = tool.ToolItem.HeightRequest;
 
-	public void RemoveItem (BaseTool tool)
-	{
-		Remove (tool.ToolItem);
-	}
+        nextIndex++;
+
+        Show();
+    }
+
+    public void RemoveItem(BaseTool tool)
+    {
+        Remove(tool.ToolItem);
+    }
 }

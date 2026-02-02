@@ -7,17 +7,12 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @Lehonti
 - @spaghetti22
-- @Matthieu-LAURENT39
-- @jordanbrotherton
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
 - The status bar color palette now supports Ctrl+clicking to edit a color, in addition to middle clicking (#1436)
 
 ### Changed
-- Effect dialogs now hide options that are not currently relevant (#1960)
-- Fixed several minor UX issues in the color dialog (#1795)
-- The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
@@ -73,7 +68,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 - Packaging changes
   - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
-  - Pinta now consistently uses an application ID of `com.github.PintaProject.Pinta`, which previously had been applied in patches for downstream packages (#1706, #1419)
+  - Pinta now consistently uses an application ID of `com.github.eonvoi.FamiliarPinta`, which previously had been applied in patches for downstream packages (#1706, #1419)
 - Breaking API changes for add-ins will require add-ins to be rebuilt against Pinta 3.1
   - Attributes used for effect configuration properties (`CaptionAttribute`, `MaximumValueAttribute`, ...) are now in the `Pinta.Core` assembly and the `Pinta.Core` namespace (#1665)
   - Methods `RegisterEffect`, `UnregisterInstanceOfEffect`, `RegisterAdjustment`, and `UnregisterInstanceOfAdjustment` in `EffectsManager` are now generic (#1678)

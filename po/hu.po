@@ -699,7 +699,7 @@ msgstr "Letöltési méret: {0}"
 msgid "Duplicate Layer"
 msgstr "Réteg kettőzése"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Képek egyszerű létrehozása és szerkesztése"
@@ -1048,7 +1048,7 @@ msgstr "Ha nem menti, akkor az összes változtatás véglegesen elvész."
 msgid "Image"
 msgstr "Kép"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Képszerkesztő"
 
@@ -1770,7 +1770,7 @@ msgstr "Fénykép"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1784,7 +1784,7 @@ msgstr "Pinta közösségi bővítmények – keresztplatformos"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta közösségi bővítmények – platformra jellemző"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta képszerkesztő"
 
@@ -1797,7 +1797,7 @@ msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "A Pinta nem támogatja a képek ebben a fájlformátumban történő mentését."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2803,7 +2803,7 @@ msgstr "_Ablak"
 msgid "by Pinta contributors"
 msgstr "– Pinta közreműködők"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "rajz;rajzolás;festmény;festés;grafika;raszter;2d;"
 

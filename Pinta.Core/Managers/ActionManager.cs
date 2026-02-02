@@ -87,7 +87,7 @@ public sealed class ActionManager
 		this.chrome = chrome;
 	}
 
-	public void CreateToolBar (Gtk.Box toolbar)
+	public void CreateActionsBarFromBox (Gtk.Box toolbar)
 	{
 		toolbar.Append (File.New.CreateToolBarItem ());
 		toolbar.Append (File.Open.CreateToolBarItem ());
@@ -97,30 +97,21 @@ public sealed class ActionManager
 		toolbar.AppendItem (File.Print.CreateToolBarItem ());
 #endif
 		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+		toolbar.Append (Edit.Cut.CreateToolBarItem ());
+		toolbar.Append (Edit.Copy.CreateToolBarItem ());
+		toolbar.Append (Edit.Paste.CreateToolBarItem ());
 
-		// Cut/Copy/Paste comes before Undo/Redo on Windows
-		if (system.OperatingSystem == OS.Windows) {
-			toolbar.Append (Edit.Cut.CreateToolBarItem ());
-			toolbar.Append (Edit.Copy.CreateToolBarItem ());
-			toolbar.Append (Edit.Paste.CreateToolBarItem ());
-			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-			toolbar.Append (Edit.Undo.CreateToolBarItem ());
-			toolbar.Append (Edit.Redo.CreateToolBarItem ());
-		} else {
-			toolbar.Append (Edit.Undo.CreateToolBarItem ());
-			toolbar.Append (Edit.Redo.CreateToolBarItem ());
-			toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
-			toolbar.Append (Edit.Cut.CreateToolBarItem ());
-			toolbar.Append (Edit.Copy.CreateToolBarItem ());
-			toolbar.Append (Edit.Paste.CreateToolBarItem ());
-		}
-
-		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+		// Paint.NET 5.1.11 doesn't have a separator here
+		//toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
 		toolbar.Append (Image.CropToSelection.CreateToolBarItem ());
 		toolbar.Append (Edit.Deselect.CreateToolBarItem ());
+
+		toolbar.Append (GtkExtensions.CreateToolBarSeparator ());
+		toolbar.Append (Edit.Undo.CreateToolBarItem ());
+		toolbar.Append (Edit.Redo.CreateToolBarItem ());
 	}
 
-	public void CreateHeaderToolBar (Adw.HeaderBar header)
+	public void CreateActionsBarFromHeader (Adw.HeaderBar header)
 	{
 		header.PackStart (File.New.CreateToolBarItem ());
 		header.PackStart (File.Open.CreateToolBarItem ());

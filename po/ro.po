@@ -701,7 +701,7 @@ msgstr "Dimensiunea descarcarii: {0}"
 msgid "Duplicate Layer"
 msgstr "Clonează stratul"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Creați și editați imagini cu ușurință"
@@ -1049,7 +1049,7 @@ msgstr "Dacă nu salvați, toate modificările vor fi pierdute definitiv."
 msgid "Image"
 msgstr "Imagine"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Editor imagini"
 
@@ -1724,7 +1724,7 @@ msgstr "Fotografie"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1738,7 +1738,7 @@ msgstr "Module comunitare Pinta - agnostice platformei"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Module comunitare Pinta - specifice platformei"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editorul de imagini Pinta"
 
@@ -1750,7 +1750,7 @@ msgstr "Site-ul Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta nu susţine salvarea imaginii in acest tip de fişier"
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2749,7 +2749,7 @@ msgstr "_Fereastră"
 msgid "by Pinta contributors"
 msgstr "de contribuitorii Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 

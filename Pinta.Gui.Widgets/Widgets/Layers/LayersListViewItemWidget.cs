@@ -118,6 +118,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 	private readonly Gtk.DrawingArea item_thumbnail;
 	private readonly Gtk.Label item_label;
 	private readonly Gtk.CheckButton visible_button;
+	private readonly Gtk.Button properties_button;
 
 	public LayersListViewItemWidget ()
 	{
@@ -135,6 +136,11 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		visibleButton.Halign = Gtk.Align.End;
 		visibleButton.Hexpand = false;
 		visibleButton.OnToggled += (_, _) => item?.HandleVisibilityToggled (visibleButton.Active);
+
+		Gtk.Button propertiesButton = Gtk.Button.NewFromIconName ("applications-system-symbolic");
+		propertiesButton.Halign = Gtk.Align.End;
+		propertiesButton.Hexpand = false;
+		propertiesButton.OnClicked += (_, _) => PintaCore.Actions.Layers.Properties.Activate();
 
 		Gtk.GestureClick menuGesture = Gtk.GestureClick.New ();
 		menuGesture.SetButton (Gdk.Constants.BUTTON_SECONDARY);
@@ -154,12 +160,14 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		Append (itemThumbnail);
 		Append (itemLabel);
 		Append (visibleButton);
+		Append (propertiesButton);
 
 		// --- References to keep
 
 		item_thumbnail = itemThumbnail;
 		item_label = itemLabel;
 		visible_button = visibleButton;
+		properties_button = propertiesButton;
 	}
 
 	private void MenuGesture_OnPressed (

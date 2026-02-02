@@ -8,16 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2026-02-01 04:28+0000\n"
-"Last-Translator: antfullstack "
-"<253273528+antfullstack@users.noreply.github.com>\n"
+"PO-Revision-Date: 2025-08-13 15:02+0000\n"
+"Last-Translator: Λευθέρης Τρόμπακας <lefteristrompakas@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -381,7 +380,7 @@ msgstr "Κύκλοι"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr "Κυκλική"
+msgstr ""
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -409,10 +408,6 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
-"Κάντε κλικ και σύρετε για να σχεδιάσετε εναλλαγή από το κύριο στο δευτερεύον "
-"χρώμα.\n"
-"Δεξί κλικ για αντιστροφή.\n"
-"Κάντε κλικ σε ένα σημείο ελέγχου και σύρετε για να το μετακινήσετε."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -473,7 +468,7 @@ msgstr "Σύννεφα"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
-msgstr "Σκληρότητα"
+msgstr "Τραχύτητα"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
@@ -703,7 +698,7 @@ msgstr "Μέγεθος λήψης: {0}"
 msgid "Duplicate Layer"
 msgstr "Διπλότυπο επιπέδου"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Δημιουργήστε και επεξεργαστείτε εικόνες εύκολα"
@@ -927,7 +922,7 @@ msgstr "Τεμάχια"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr "Ελεύθερη μορφή"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -964,11 +959,11 @@ msgstr "Διαβάθμιση χρώματος"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr "Έγινε δημιουργία διαβάθμισης χρώματος"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr "Έγινε επεξεργασία της διαβάθμισης χρωμάτων"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
@@ -1052,7 +1047,7 @@ msgstr "Αν δε γίνει αποθήκευση, οι αλλαγές θα χα
 msgid "Image"
 msgstr "Εικόνα"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Επεξεργασία εικόνας"
 
@@ -1093,13 +1088,6 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
-"Στη λειτουργία ελεύθερης μορφής, κάντε κλικ και σύρετε για να ζωγραφίσετε το "
-"περίγραμμα για μία περιοχή επιλογής.\n"
-"\n"
-"Στη λειτουργία πολύγωνου, κάντε κλικ και σύρετε για να προσθέσετε ένα νέο "
-"σημείο στην επιλογή.\n"
-"Πατήστε Enter για να τελειοποιήσετε την επιλογή.\n"
-"Πατήστε Backspace για να διαγράψετε το τελευταίο σημείο."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1187,7 +1175,7 @@ msgstr "Τοπίο"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr "Λειτουργία λάσο"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1465,7 +1453,7 @@ msgstr "Λάβα του Άρη"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
-msgstr "Μέγιστο Μέγεθος"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1482,7 +1470,7 @@ msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr "Ελάχιστο μέγεθος"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1767,9 +1755,9 @@ msgstr "Φωτογραφία"
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
-msgstr "Φυλλοτάξη"
+msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1783,7 +1771,7 @@ msgstr "Πρόσθετα κοινότητας Pinta - Για κάθε πλατφ
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Πρόσθετα κοινότητας Pinta - Για συγκεκριμένη πλατφόρμα"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Επεξεργασία εικόνας Pinta"
 
@@ -1796,7 +1784,7 @@ msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Το Pinta δεν υποστηρίζει δυνατότητα αποθήκευσης σε αυτό το φορμά αρχείου."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -1845,12 +1833,12 @@ msgstr "Το σημείο προστέθηκε"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr "Διαβάθμιση Σημείων"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
-msgstr "Χρώμα Σημείων"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1859,7 +1847,7 @@ msgstr "Το σημείο διαγράφηκε"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
-msgstr "Μέγεθος Σημείων"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1867,7 +1855,7 @@ msgstr "Πολική αναστροφή"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr "Πολύγωνο"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -2036,7 +2024,7 @@ msgstr "Αντανάκλαση"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr "Διάθλαση"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2168,7 +2156,7 @@ msgstr "Περιστροφή"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr "Τραχύτητα"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2803,7 +2791,7 @@ msgstr "Παρά_θυρα"
 msgid "by Pinta contributors"
 msgstr "από τους συντελεστές της Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "ζωγραφίζω;ζωγραφική;βάφω;βαφή;γραφικά;raster;2d;"
 
@@ -2834,7 +2822,7 @@ msgstr ""
 "  Vasilis Kosmidis https://launchpad.net/~vasiliskos\n"
 "  vassilis karamitros https://launchpad.net/~ecatodarcus\n"
 "  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios\n"
-"  Lefteris Trompakas https://launchpad.net/~androidcreator"
+"Lefteris Trompakas https://launchpad.net/~androidcreator5"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49

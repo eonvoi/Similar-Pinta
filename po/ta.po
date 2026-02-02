@@ -697,7 +697,7 @@ msgstr "பதிவிறக்க அளவு: {0}"
 msgid "Duplicate Layer"
 msgstr "நகல் அடுக்கு"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "படங்களை எளிதாக உருவாக்கி திருத்தவும்"
@@ -1045,7 +1045,7 @@ msgstr "நீங்கள் சேமிக்கவில்லை என்�
 msgid "Image"
 msgstr "படம்"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "பட ஆசிரியர்"
 
@@ -1752,7 +1752,7 @@ msgstr "புகைப்படம்"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1766,7 +1766,7 @@ msgstr "பிண்டா கம்யூனிட்டி அடின்க�
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "பிண்டா கம்யூனிட்டி அடின்கள் - இயங்குதளம் சார்ந்த"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "பிண்டா பட எடிட்டர்"
 
@@ -1778,7 +1778,7 @@ msgstr "வலைத்தளத்தைக் கேளுங்கள்"
 msgid "Pinta does not support saving images in this file format."
 msgstr "இந்த கோப்பு வடிவத்தில் படங்களை சேமிப்பதை பிண்டா ஆதரிக்கவில்லை."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2778,7 +2778,7 @@ msgstr "_ சாளரம்"
 msgid "by Pinta contributors"
 msgstr "வழங்கியவர் பிண்டா பங்களிப்பாளர்கள்"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "டிரா; வரைதல்; பெயிண்ட்; ஓவியம்; கிராபிக்ச்; ராச்டர்; 2 டி;"
 

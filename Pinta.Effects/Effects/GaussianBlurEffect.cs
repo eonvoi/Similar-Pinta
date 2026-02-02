@@ -74,9 +74,9 @@ public sealed class GaussianBlurEffect : BaseEffect
 		Span<long> gSums = stackalloc long[wlen];
 		Span<long> rSums = stackalloc long[wlen];
 
-		// Cache these for a massive performance boost
 		int src_width = src.Width;
 		int src_height = src.Height;
+
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
@@ -86,6 +86,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 				continue;
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
+
 				long waSum = 0;
 				long wcSum = 0;
 				long aSum = 0;
@@ -96,26 +97,28 @@ public sealed class GaussianBlurEffect : BaseEffect
 				var dst_row = dst_data.Slice (y * src_width, src_width);
 
 				for (int wx = 0; wx < wlen; ++wx) {
-					int srcX = rect.Left + wx - r;
-					waSums[wx] = 0;
-					wcSums[wx] = 0;
-					aSums[wx] = 0;
-					bSums[wx] = 0;
-					gSums[wx] = 0;
-					rSums[wx] = 0;
 
-					if (srcX < 0 || srcX >= src_width)
+					int srcX = rect.Left + wx - r;
+					unchecked {
+						waSums[wx] = 0;
+						wcSums[wx] = 0;
+						aSums[wx] = 0;
+						bSums[wx] = 0;
+						gSums[wx] = 0;
+						rSums[wx] = 0;
+					}
+					if ((uint) srcX >= (uint) src_width)
 						continue;
 
 					for (int wy = 0; wy < wlen; ++wy) {
-						int srcY = y + wy - r;
 
-						if (srcY < 0 || srcY >= src_height)
+						int srcY = y + wy - r;
+						if ((uint) srcY >= (uint) src_height)
 							continue;
 
-						PointI pixelPosition = new (srcX, srcY);
+						int srcIndex = srcY * src_width + srcX;
+						ColorBgra c = src_data[srcIndex].ToStraightAlpha ();
 
-						ColorBgra c = src.GetColorBgra (src_data, src_width, pixelPosition).ToStraightAlpha ();
 						int wp = w[wy];
 
 						waSums[wx] += wp;
@@ -124,20 +127,23 @@ public sealed class GaussianBlurEffect : BaseEffect
 						wp >>= 8;
 
 						if (c.A > 0) {
-							aSums[wx] += wp * c.A;
-							bSums[wx] += wp * c.B;
-							gSums[wx] += wp * c.G;
-							rSums[wx] += wp * c.R;
+							unchecked {
+								aSums[wx] += wp * c.A;
+								bSums[wx] += wp * c.B;
+								gSums[wx] += wp * c.G;
+								rSums[wx] += wp * c.R;
+							}
 						}
 					}
-
-					int wwx = w[wx];
-					waSum += wwx * waSums[wx];
-					wcSum += wwx * wcSums[wx];
-					aSum += wwx * aSums[wx];
-					bSum += wwx * bSums[wx];
-					gSum += wwx * gSums[wx];
-					rSum += wwx * rSums[wx];
+					unchecked {
+						int wwx = w[wx];
+						waSum += wwx * waSums[wx];
+						wcSum += wwx * wcSums[wx];
+						aSum += wwx * aSums[wx];
+						bSum += wwx * bSums[wx];
+						gSum += wwx * gSums[wx];
+						rSum += wwx * rSums[wx];
+					}
 				}
 
 				wcSum >>= 8;
@@ -150,18 +156,18 @@ public sealed class GaussianBlurEffect : BaseEffect
 					byte green = (byte) (gSum / wcSum);
 					byte red = (byte) (rSum / wcSum);
 
-					dst_row[rect.Left] = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
+					dst_row[rect.Left] =
+						ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
 				}
 
 				for (int x = rect.Left + 1; x <= rect.Right; ++x) {
-					for (int i = 0; i < wlen - 1; ++i) {
-						waSums[i] = waSums[i + 1];
-						wcSums[i] = wcSums[i + 1];
-						aSums[i] = aSums[i + 1];
-						bSums[i] = bSums[i + 1];
-						gSums[i] = gSums[i + 1];
-						rSums[i] = rSums[i + 1];
-					}
+
+					waSums.Slice (1).CopyTo (waSums);
+					wcSums.Slice (1).CopyTo (wcSums);
+					aSums.Slice (1).CopyTo (aSums);
+					bSums.Slice (1).CopyTo (bSums);
+					gSums.Slice (1).CopyTo (gSums);
+					rSums.Slice (1).CopyTo (rSums);
 
 					waSum = 0;
 					wcSum = 0;
@@ -170,8 +176,7 @@ public sealed class GaussianBlurEffect : BaseEffect
 					gSum = 0;
 					rSum = 0;
 
-					int wx;
-					for (wx = 0; wx < wlen - 1; ++wx) {
+					for (int wx = 0; wx < wlen - 1; ++wx) {
 						long wwx = w[wx];
 						waSum += wwx * waSums[wx];
 						wcSum += wwx * wcSums[wx];
@@ -181,47 +186,50 @@ public sealed class GaussianBlurEffect : BaseEffect
 						rSum += wwx * rSums[wx];
 					}
 
-					wx = wlen - 1;
+					int last = wlen - 1;
 
-					waSums[wx] = 0;
-					wcSums[wx] = 0;
-					aSums[wx] = 0;
-					bSums[wx] = 0;
-					gSums[wx] = 0;
-					rSums[wx] = 0;
+					waSums[last] = 0;
+					wcSums[last] = 0;
+					aSums[last] = 0;
+					bSums[last] = 0;
+					gSums[last] = 0;
+					rSums[last] = 0;
 
-					int srcX = x + wx - r;
+					int srcX = x + last - r;
 
-					if (srcX >= 0 && srcX < src_width) {
+					if ((uint) srcX < (uint) src_width) {
+
 						for (int wy = 0; wy < wlen; ++wy) {
-							int srcY = y + wy - r;
 
-							if (srcY < 0 || srcY >= src_height)
+							int srcY = y + wy - r;
+							if ((uint) srcY >= (uint) src_height)
 								continue;
 
-							ColorBgra c = src.GetColorBgra (src_data, src_width, new (srcX, srcY)).ToStraightAlpha ();
+							int srcIndex = srcY * src_width + srcX;
+							ColorBgra c = src_data[srcIndex].ToStraightAlpha ();
+
 							int wp = w[wy];
 
-							waSums[wx] += wp;
+							waSums[last] += wp;
 							wp *= c.A + (c.A >> 7);
-							wcSums[wx] += wp;
+							wcSums[last] += wp;
 							wp >>= 8;
 
 							if (c.A > 0) {
-								aSums[wx] += wp * (long) c.A;
-								bSums[wx] += wp * (long) c.B;
-								gSums[wx] += wp * (long) c.G;
-								rSums[wx] += wp * (long) c.R;
+								aSums[last] += wp * c.A;
+								bSums[last] += wp * c.B;
+								gSums[last] += wp * c.G;
+								rSums[last] += wp * c.R;
 							}
 						}
 
-						int wr = w[wx];
-						waSum += wr * waSums[wx];
-						wcSum += wr * wcSums[wx];
-						aSum += wr * aSums[wx];
-						bSum += wr * bSums[wx];
-						gSum += wr * gSums[wx];
-						rSum += wr * rSums[wx];
+						int wr = w[last];
+						waSum += wr * waSums[last];
+						wcSum += wr * wcSums[last];
+						aSum += wr * aSums[last];
+						bSum += wr * bSums[last];
+						gSum += wr * gSums[last];
+						rSum += wr * rSums[last];
 					}
 
 					wcSum >>= 8;
@@ -234,7 +242,8 @@ public sealed class GaussianBlurEffect : BaseEffect
 						byte green = (byte) (gSum / wcSum);
 						byte red = (byte) (rSum / wcSum);
 
-						dst_row[x] = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
+						dst_row[x] =
+							ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
 					}
 				}
 			}

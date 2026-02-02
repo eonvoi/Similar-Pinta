@@ -699,7 +699,7 @@ msgstr "Mida de la baixada: {0}"
 msgid "Duplicate Layer"
 msgstr "Capa duplicada"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Creeu i editeu imatges de forma senzilla"
@@ -1047,7 +1047,7 @@ msgstr "Si no deseu, es perdran definitivament tots els canvis."
 msgid "Image"
 msgstr "Imatge"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Editor d’imatges"
 
@@ -1725,7 +1725,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1739,7 +1739,7 @@ msgstr "Connectors de la comunitat de Pinta: multiplataforma"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Connectors de la comunitat de Pinta: específics d’una plataforma"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Editor d’imatges Pinta"
 
@@ -1751,7 +1751,7 @@ msgstr "Lloc web del Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "El Pinta no permet desar imatges en aquest format de fitxer."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2748,7 +2748,7 @@ msgstr "Fi_nestra"
 msgid "by Pinta contributors"
 msgstr "per contribuents del Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "dibuixa;dibuixant;pinta;pintant;gràfics;ràster;2d;"
 

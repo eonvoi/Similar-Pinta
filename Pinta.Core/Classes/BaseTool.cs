@@ -324,7 +324,7 @@ public abstract class BaseTool
 		CurrentCursor = cursor;
 
 		if (workspace.HasOpenDocuments)
-			workspace.ActiveWorkspace.Canvas.Cursor = cursor;
+			workspace.ActiveWorkspace.PintaCanvas.Cursor = cursor;
 	}
 
 	#region Toolbar

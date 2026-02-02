@@ -703,7 +703,7 @@ msgstr "İndirme boyutu: {0}"
 msgid "Duplicate Layer"
 msgstr "Katmanı Çoğalt"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Görüntüleri kolayca oluşturun ve düzenleyin"
@@ -1054,7 +1054,7 @@ msgstr "Kaydetmezseniz tüm değişiklikler kalıcı olarak kaybolacak."
 msgid "Image"
 msgstr "Görüntü"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Görüntü Düzenleyici"
 
@@ -1769,7 +1769,7 @@ msgstr "Fotoğraf"
 msgid "Phyllotaxis"
 msgstr "Filotaksi"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1783,7 +1783,7 @@ msgstr "Pinta Topluluk Eklentileri - Çapraz Platform"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta Topluluk Eklentileri - Platform Özel"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Görüntü Düzenleyici"
 
@@ -1795,7 +1795,7 @@ msgstr "Pinta Web Sayfası"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta görüntüleri bu dosya biçimiyle kaydetmeyi desteklemiyor."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2801,7 +2801,7 @@ msgstr "_Pencere"
 msgid "by Pinta contributors"
 msgstr "Pinta katılımcıları tarafından"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "çizim;çizmek;boya;resim;grafik;raster;2d;"
 

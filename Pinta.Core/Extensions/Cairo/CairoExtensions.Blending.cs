@@ -44,7 +44,7 @@ partial class CairoExtensions
 		double opacity = 1.0)
 	{
 		g.Save ();
-
+		g.Operator = GetBlendModeOperator(mode);
 		g.SetBlendMode (mode);
 		g.SetSourceSurface (src, 0, 0);
 		g.PaintWithAlpha (opacity);

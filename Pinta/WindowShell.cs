@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using Pinta.Core;
 
 namespace Pinta;
@@ -34,7 +35,7 @@ public sealed class WindowShell
 	private readonly Adw.HeaderBar? header_bar;
 	private readonly Gtk.Box shell_layout;
 	private Gtk.Box? workspace_layout;
-	private Gtk.Box? main_toolbar;
+	private Gtk.Box? current_tool_info_toolbar;
 
 	public WindowShell (
 		Gtk.Application app,
@@ -81,18 +82,18 @@ public sealed class WindowShell
 	public Gtk.ApplicationWindow Window => app_window;
 	public Adw.HeaderBar? HeaderBar => header_bar;
 
-	public Gtk.Box CreateToolBar (string name)
+	public Gtk.Box CreateCurrentToolInfoBar (string name)
 	{
-		main_toolbar = GtkExtensions.CreateToolBar ();
-		main_toolbar.Name = name;
+		current_tool_info_toolbar = GtkExtensions.CreateToolBar ();
+		current_tool_info_toolbar.Name = name;
 
-		shell_layout.Append (main_toolbar);
-		main_toolbar.Show ();
+		shell_layout.Append (current_tool_info_toolbar);
+		current_tool_info_toolbar.Show ();
 
-		return main_toolbar;
+		return current_tool_info_toolbar;
 	}
 
-	public Gtk.Box CreateStatusBar (string name)
+	public Gtk.Box CreateColorSwatchBar (string name)
 	{
 		var statusbar = GtkExtensions.CreateToolBar ();
 		statusbar.Name = name;
@@ -112,5 +113,17 @@ public sealed class WindowShell
 		shell_layout.Append (workspace_layout);
 
 		return workspace_layout;
+	}
+
+	Gtk.Box? tool_info_bar = null;
+
+	internal Gtk.Box CreateToolInfoBarBox (string name)
+	{
+		tool_info_bar = GtkExtensions.CreateToolBar ();
+		tool_info_bar.Name = name;
+
+		shell_layout.Append (tool_info_bar);
+
+		return tool_info_bar;
 	}
 }

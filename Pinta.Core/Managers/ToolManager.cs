@@ -184,12 +184,17 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public void SetCurrentTool (BaseTool tool)
 	{
+		//Console.WriteLine($"ToolManager.SetCurrentTool: Tool is {tool.Name}");
 		// Bail if this is already the current tool
 		if (CurrentTool == tool)
+		{
+			//Console.WriteLine("ToolManager.SetCurrentTool: CurrentTool is already the wanted tool");
 			return;
+		}
 
 		// Unload previous tool if needed
 		if (CurrentTool is not null) {
+			//Console.WriteLine("ToolManager.SetCurrentTool: CurrentTool is not null");
 			PreviousTool = CurrentTool;
 			DeactivateTool (PreviousTool, tool);
 		}
@@ -202,11 +207,11 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 		ToolImage.SetFromIconName (tool.Icon);
 
-		chrome_manager.ToolToolBar.Append (ToolLabel);
-		chrome_manager.ToolToolBar.Append (ToolImage);
-		chrome_manager.ToolToolBar.Append (ToolSeparator);
+		chrome_manager.ToolOptionsAndNameBar.Append (ToolLabel);
+		chrome_manager.ToolOptionsAndNameBar.Append (ToolImage);
+		chrome_manager.ToolOptionsAndNameBar.Append (ToolSeparator);
 
-		chrome_manager.ToolToolBar.Append (ToolWidgetsScroll);
+		chrome_manager.ToolOptionsAndNameBar.Append (ToolWidgetsScroll);
 		tool.DoBuildToolBar (ToolWidgetsBox);
 
 		workspace_manager.Invalidate ();
@@ -216,7 +221,10 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	public bool SetCurrentTool (string tool)
 	{
 		if (FindTool (tool) is not BaseTool t)
+		{
+			//Console.WriteLine($"ToolManager.SetCurrentTool (string): {tool} is not a BaseTool");
 			return false;
+		}
 
 		SetCurrentTool (t);
 		return true;
@@ -260,7 +268,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	private void DeactivateTool (BaseTool tool, BaseTool? newTool)
 	{
 		ToolWidgetsBox.RemoveAll ();
-		chrome_manager.ToolToolBar.RemoveAll ();
+		chrome_manager.ToolOptionsAndNameBar.RemoveAll ();
 
 		tool.DoDeactivated (workspace_manager.ActiveDocumentOrDefault, newTool);
 		tool.ToolItem.Active = false;
@@ -281,7 +289,9 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	public void DoMouseUp (Document document, ToolMouseEventArgs args)
 	{
 		if (!TryMouseUpPanOverride (document, args))
+		{
 			CurrentTool?.DoMouseUp (document, args);
+		}
 	}
 
 	public bool DoKeyDown (Document document, ToolKeyEventArgs args)
@@ -311,8 +321,8 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 			return false;
 
 		is_panning = true;
-		stored_cursor = document.Workspace.Canvas.Cursor;
-		document.Workspace.Canvas.Cursor = pan.DefaultCursor;
+		stored_cursor = document.Workspace.PintaCanvas.Cursor;
+		document.Workspace.PintaCanvas.Cursor = pan.DefaultCursor;
 		pan.DoMouseDown (document, args);
 		return true;
 	}
@@ -337,7 +347,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 		is_panning = false;
 		pan.DoMouseUp (document, args);
-		document.Workspace.Canvas.Cursor = stored_cursor;
+		document.Workspace.PintaCanvas.Cursor = stored_cursor;
 		return true;
 	}
 

@@ -61,9 +61,9 @@ internal sealed class AboutDialogAction : IActionHandler
 	{
 		using Adw.AboutWindow dialog = Adw.AboutWindow.New ();
 		dialog.TransientFor = chrome.MainWindow;
-		dialog.Title = Translations.GetString ("About Pinta");
-		dialog.ApplicationName = Translations.GetString ("Pinta");
-		dialog.ApplicationIcon = Icons.Pinta;
+		dialog.Title = Translations.GetString ("About Original Pinta");
+		dialog.ApplicationName = Translations.GetString ("Familiar Pinta");
+		dialog.ApplicationIcon = Icons.FamiliarPinta;
 		dialog.Version = application_version;
 		dialog.Website = "https://www.pinta-project.com";
 		dialog.Comments = Translations.GetString ("Easily create and edit images");
@@ -71,8 +71,8 @@ internal sealed class AboutDialogAction : IActionHandler
 		dialog.License = BuildLicenseText ();
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
-		dialog.IssueUrl = "https://github.com/PintaProject/Pinta/issues";
-		dialog.SupportUrl = "https://github.com/PintaProject/Pinta/discussions";
+		dialog.IssueUrl = "";
+		dialog.SupportUrl = "";
 		await dialog.PresentAsync ();
 	}
 

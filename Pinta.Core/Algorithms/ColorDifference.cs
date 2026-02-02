@@ -20,66 +20,64 @@ namespace Pinta.Core;
 /// </summary>
 public static class ColorDifference
 {
-	public static void RenderColorDifferenceEffect (
-		double[,] weights,
-		ImageSurface source,
-		ImageSurface destination,
-		ReadOnlySpan<RectangleI> rois)
-	{
-		if (weights.GetLength (0) != 3 || weights.GetLength (1) != 3) throw new ArgumentException ("Must be a 3x3 array", nameof (weights));
+    // weights must be length 9, row-major: [0..2]=row0, [3..5]=row1, [6..8]=row2
+    public static void RenderColorDifferenceEffect(
+        ReadOnlySpan<double> weights,
+        ImageSurface source,
+        ImageSurface destination,
+        ReadOnlySpan<RectangleI> rois)
+    {
+        if (weights.Length != 9)
+            throw new ArgumentException("Must contain exactly 9 elements", nameof(weights));
 
-		RectangleI surfaceBounds = source.GetBounds ();
+        RectangleI bounds = source.GetBounds();
+        int width = bounds.Width;
+        int height = bounds.Height;
 
-		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> destinationData = destination.GetPixelData ();
+        ReadOnlySpan<ColorBgra> src = source.GetReadOnlyPixelData();
+        Span<ColorBgra> dst = destination.GetPixelData();
 
-		foreach (RectangleI rect in rois) {
+        foreach (var rect in rois)
+        {
+            foreach (var pixel in Tiling.GeneratePixelOffsets(rect, source.GetSize()))
+            {
+                int x = pixel.coordinates.X;
+                int y = pixel.coordinates.Y;
 
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, source.GetSize ())) {
+                // clamp kernel area to image bounds
+                int x0 = x > bounds.X ? -1 : 0;
+                int x1 = x < bounds.X + width - 1 ? 1 : 0;
+                int y0 = y > bounds.Y ? -1 : 0;
+                int y1 = y < bounds.Y + height - 1 ? 1 : 0;
 
-				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
-					weights,
-					sourceData,
-					surfaceBounds,
-					pixel.coordinates);
-			}
-		}
-	}
+                double rSum = 0;
+                double gSum = 0;
+                double bSum = 0;
 
-	private static ColorBgra GetFinalPixelColor (
-		double[,] weights,
-		ReadOnlySpan<ColorBgra> sourceData,
-		RectangleI surfaceBounds,
-		PointI coordinates)
-	{
-		PointI fStart = new (
-			X: (coordinates.X == surfaceBounds.X) ? 1 : 0,
-			Y: (coordinates.Y == surfaceBounds.Y) ? 1 : 0);
+                int baseIndex = y * width + x;
 
-		PointI fEnd = new (
-			X: (coordinates.X == surfaceBounds.X + surfaceBounds.Width - 1) ? 2 : 3,
-			Y: (coordinates.Y == surfaceBounds.Y + surfaceBounds.Height - 1) ? 2 : 3);
+                for (int ky = y0; ky <= y1; ky++)
+                {
+                    int srcRow = baseIndex + ky * width;
+                    int wRow = (ky + 1) * 3;
 
-		// loop through each weight
+                    for (int kx = x0; kx <= x1; kx++)
+                    {
+                        double w = weights[wRow + (kx + 1)];
+                        ColorBgra c = src[srcRow + kx];
 
-		double rSum = 0.0;
-		double gSum = 0.0;
-		double bSum = 0.0;
+                        rSum += w * c.R;
+                        gSum += w * c.G;
+                        bSum += w * c.B;
+                    }
+                }
 
-		for (int fy = fStart.Y; fy < fEnd.Y; ++fy) {
-			for (int fx = fStart.X; fx < fEnd.X; ++fx) {
-				double weight = weights[fy, fx];
-				ColorBgra c = sourceData[(coordinates.Y - 1 + fy) * surfaceBounds.Width + (coordinates.X - 1 + fx)];
-				rSum += weight * c.R;
-				gSum += weight * c.G;
-				bSum += weight * c.B;
-			}
-		}
-
-		byte iRsum = Utility.ClampToByte (rSum);
-		byte iGsum = Utility.ClampToByte (gSum);
-		byte iBsum = Utility.ClampToByte (bSum);
-
-		return ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
-	}
+                dst[pixel.memoryOffset] = ColorBgra.FromBgra(
+                    Utility.ClampToByte(bSum),
+                    Utility.ClampToByte(gSum),
+                    Utility.ClampToByte(rSum),
+                    255);
+            }
+        }
+    }
 }

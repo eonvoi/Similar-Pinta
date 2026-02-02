@@ -98,19 +98,19 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Gtk.Label opacityLabel = Gtk.Label.New (Translations.GetString ("Opacity:"));
 		opacityLabel.Halign = Gtk.Align.End;
 
-		Gtk.SpinButton opacitySpinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
+		Gtk.SpinButton opacitySpinner = Gtk.SpinButton.NewWithRange (0, 255, 1);
 		opacitySpinner.Adjustment!.PageIncrement = 10;
 		opacitySpinner.ClimbRate = 1;
-		opacitySpinner.Value = Math.Round (initialProperties.Opacity * 100);
+		opacitySpinner.Value = Math.Round (initialProperties.Opacity * 255);
 		opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
 		opacitySpinner.SetActivatesDefaultImmediate (true);
 
-		Gtk.Scale opacitySlider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 100, 1);
+		Gtk.Scale opacitySlider = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 0, 255, 1);
 		opacitySlider.Digits = 0;
 		opacitySlider.Adjustment!.PageIncrement = 10;
 		opacitySlider.Hexpand = true;
 		opacitySlider.Halign = Gtk.Align.Fill;
-		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 100));
+		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 255));
 		opacitySlider.OnValueChanged += OnOpacitySliderChanged;
 
 		Gtk.Box opacityBox = new () { Spacing = spacing };
@@ -224,7 +224,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Document doc = workspace.ActiveDocument;
 
 		//TODO check redraws are being throttled.
-		current_layer_opacity = opacity_spinner.Value / 100d;
+		current_layer_opacity = opacity_spinner.Value / 255d;
 
 		doc.Layers.CurrentUserLayer.Opacity = current_layer_opacity;
 

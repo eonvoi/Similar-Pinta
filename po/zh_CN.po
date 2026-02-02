@@ -699,7 +699,7 @@ msgstr "文件下载大小: {0}"
 msgid "Duplicate Layer"
 msgstr "复制图层"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "轻松创建和编辑图像"
@@ -1045,7 +1045,7 @@ msgstr "如果您不保存，所有修改 将会永久丢失。"
 msgid "Image"
 msgstr "图像"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "图像编辑器"
 
@@ -1720,7 +1720,7 @@ msgstr "照片"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1734,7 +1734,7 @@ msgstr "Pinta 社区插件 - 跨平台"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta 社区插件 - 特定于平台"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta 图片编辑器"
 
@@ -1746,7 +1746,7 @@ msgstr "Pinta 网站"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta 不支持保存图像为这种格式。"
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2739,7 +2739,7 @@ msgstr "窗口"
 msgid "by Pinta contributors"
 msgstr "由 Pinta 贡献者"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 "draw;drawing;paint;painting;graphics;raster;2d;绘制;绘图;绘画;图形;光栅;"

@@ -914,7 +914,7 @@ public sealed class TextTool : BaseTool
 
 		is_editing = true;
 
-		im_context.SetClientWidget (workspace.ActiveWorkspace.Canvas);
+		im_context.SetClientWidget (workspace.ActiveWorkspace.CanvasWindow);
 
 		selection ??= workspace.ActiveDocument.Selection.Clone ();
 

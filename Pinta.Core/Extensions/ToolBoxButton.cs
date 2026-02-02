@@ -42,7 +42,8 @@ public sealed class ToolBoxButton : ToggleButton
 		IconName = tool.Icon;
 		Name = tool.Name;
 		CanFocus = false;
-
+		WidthRequest = 40;
+		HeightRequest = WidthRequest;
 
 		SetCssClasses ([Styles.ToolBoxButton, AdwaitaStyles.Flat]);
 

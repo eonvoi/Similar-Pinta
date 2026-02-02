@@ -59,20 +59,27 @@ public readonly record struct RectangleD (
 	/// Otherwise, a negative width or height is clamped to zero.
 	/// </param>
 	/// </summary>
-	public static RectangleD FromPoints (in PointD a, in PointD b, bool invertIfNegative = true)
+public static RectangleD FromPoints(in PointD a, in PointD b, bool invertIfNegative = true)
+{
+	if (invertIfNegative)
 	{
-		if (invertIfNegative) {
-			double x1 = Math.Min (a.X, b.X);
-			double y1 = Math.Min (a.Y, b.Y);
-			double x2 = Math.Max (a.X, b.X);
-			double y2 = Math.Max (a.Y, b.Y);
-			return new (x1, y1, x2 - x1, y2 - y1);
-		} else {
-			double width = Math.Max (0.0, b.X - a.X);
-			double height = Math.Max (0.0, b.Y - a.Y);
-			return new (a.X, a.Y, width, height);
-		}
+		double x1 = (a.X < b.X) ? a.X : b.X;
+		double y1 = (a.Y < b.Y) ? a.Y : b.Y;
+		double x2 = (a.X > b.X) ? a.X : b.X;
+		double y2 = (a.Y > b.Y) ? a.Y : b.Y;
+		return new RectangleD(x1, y1, x2 - x1, y2 - y1);
 	}
+	else
+	{
+		double width = b.X - a.X;
+		if (width < 0.0) width = 0.0;
+
+		double height = b.Y - a.Y;
+		if (height < 0.0) height = 0.0;
+
+		return new RectangleD(a.X, a.Y, width, height);
+	}
+}
 
 	public static RectangleD Zero { get; } = new (0d, 0d, 0d, 0d);
 

@@ -55,12 +55,12 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 	void IActionHandler.Initialize ()
 	{
-		actions.File.NewScreenshot.Activated += Activated;
+		//actions.File.NewScreenshot.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		actions.File.NewScreenshot.Activated -= Activated;
+		//actions.File.NewScreenshot.Activated -= Activated;
 	}
 
 	private async void Activated (object sender, EventArgs args)

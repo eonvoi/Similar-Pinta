@@ -695,7 +695,7 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "レイヤーを複製"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "簡単に画像を作成したり編集を行います"
@@ -1041,7 +1041,7 @@ msgstr "保存しない場合、すべての変更が失われます。"
 msgid "Image"
 msgstr "画像"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "画像エディター"
 
@@ -1708,7 +1708,7 @@ msgstr "写真"
 msgid "Phyllotaxis"
 msgstr ""
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1722,7 +1722,7 @@ msgstr "Pinta コミュニティアドイン - クリスプラットフォーム
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta コミュニティアドイン - プラットフォームに依存"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta 画像エディター"
 
@@ -1734,7 +1734,7 @@ msgstr "Pinta 公式サイト"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pintaはこの画像形式での保存をサポートしていません"
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2730,7 +2730,7 @@ msgstr "ウィンドウ(_W)"
 msgid "by Pinta contributors"
 msgstr "Pinta 貢献者"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "描画;ペイント;グラフィックス;ラスター;2d;"
 

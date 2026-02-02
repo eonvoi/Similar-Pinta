@@ -702,7 +702,7 @@ msgstr "Nerladdningsstorlek: {0}"
 msgid "Duplicate Layer"
 msgstr "Klona lager"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Skapa och redigera bilder enkelt"
@@ -1050,7 +1050,7 @@ msgstr "Om du inte sparar kommer alla ändringar att gå förlorade."
 msgid "Image"
 msgstr "Bild"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Bildredigerare"
 
@@ -1766,7 +1766,7 @@ msgstr "Foto"
 msgid "Phyllotaxis"
 msgstr "Fyllotaxi"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1780,7 +1780,7 @@ msgstr "Pinta Community-tillägg - Plattformsöverkridande"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Pinta Community-tillägg - Plattformsspecifik"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta Bildredigerare"
 
@@ -1792,7 +1792,7 @@ msgstr "Pintas webbplats"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta stöder inte sparande av bilder i detta filformat."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2796,7 +2796,7 @@ msgstr "_Fönster"
 msgid "by Pinta contributors"
 msgstr "av Pinta-bidragsgivare"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "rita;teckning;måla;målning;grafik;raster;2d;"
 

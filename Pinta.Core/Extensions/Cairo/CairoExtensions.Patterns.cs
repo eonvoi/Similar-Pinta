@@ -186,189 +186,254 @@ partial class CairoExtensions
 		return dash_pattern.Contains ('-') && dash_pattern != "-";
 	}
 
-	// Ported from PDN
-	public static void FillStencilByColor (
-		ImageSurface surface,
-		BitMask stencil,
-		ColorBgra cmp,
-		int tolerance,
-		out RectangleD boundingBox,
-		Region limitRegion,
-		bool limitToSelection)
-	{
-		int surf_width = surface.Width;
+	public static void FillStencilByColor(
+	ImageSurface surface,
+	BitMask stencil,
+	ColorBgra cmp,
+	int tolerance,
+	out RectangleD boundingBox,
+	Region limitRegion,
+	bool limitToSelection)
+{
+	int width = surface.Width;
+	int height = surface.Height;
 
-		int top = int.MaxValue;
-		int bottom = int.MinValue;
-		int left = int.MaxValue;
-		int right = int.MinValue;
-		RectangleI[] scans;
+	stencil.Clear(false);
 
-		stencil.Clear (false);
+	RectangleI[] scans;
 
-		if (limitToSelection) {
-			var excluded = CreateRegion (new RectangleI (0, 0, stencil.Width, stencil.Height));
-			excluded.Xor (limitRegion);
-			scans = new RectangleI[excluded.GetNumRectangles ()];
-			for (int i = 0, n = scans.Length; i < n; ++i) {
-				excluded.GetRectangle (i, out var cairo_rect);
-				scans[i] = cairo_rect.ToRectangleI ();
-			}
-		} else {
-			scans = [];
+	if (limitToSelection) {
+		var excluded = CreateRegion(new RectangleI(0, 0, stencil.Width, stencil.Height));
+		excluded.Xor(limitRegion);
+
+		int n = excluded.GetNumRectangles();
+		scans = new RectangleI[n];
+
+		for (int i = 0; i < n; ++i) {
+			excluded.GetRectangle(i, out var r);
+			scans[i] = r.ToRectangleI();
 		}
 
-		foreach (var rect in scans)
-			stencil.Set (rect, true);
+		for (int i = 0; i < n; ++i)
+			stencil.Set(scans[i], true);
+	} else {
+		scans = Array.Empty<RectangleI>();
+	}
 
-		Parallel.For (0, surface.Height, y => {
+	int globalLeft = int.MaxValue;
+	int globalRight = int.MinValue;
+	int globalTop = int.MaxValue;
+	int globalBottom = int.MinValue;
 
-			bool foundPixelInRow = false;
+	object bboxLock = new();
 
-			ReadOnlySpan<ColorBgra> row = surface.GetReadOnlyPixelData ().Slice (y * surf_width, surf_width);
+	Parallel.For(
+		0,
+		height,
+		() => (
+			left: int.MaxValue,
+			right: int.MinValue,
+			top: int.MaxValue,
+			bottom: int.MinValue
+		),
+		(y, _, local) => {
 
-			for (int x = 0; x < surf_width; ++x) {
+			// Obtain span locally (legal)
+			ReadOnlySpan<ColorBgra> data = surface.GetReadOnlyPixelData();
+			ReadOnlySpan<ColorBgra> row = data.Slice(y * width, width);
 
-				if (!ColorBgra.ColorsWithinTolerance (cmp, row[x], tolerance))
+			bool found = false;
+
+			for (int x = 0; x < width; ++x) {
+				if (!ColorBgra.ColorsWithinTolerance(cmp, row[x], tolerance))
 					continue;
 
-				stencil.Set (x, y, true);
+				stencil.Set(x, y, true);
 
-				if (x < left)
-					left = x;
+				if (x < local.left) local.left = x;
+				if (x > local.right) local.right = x;
 
-				if (x > right)
-					right = x;
-
-				foundPixelInRow = true;
+				found = true;
 			}
 
-			if (foundPixelInRow) {
-
-				if (y < top)
-					top = y;
-
-				if (y >= bottom)
-					bottom = y;
+			if (found) {
+				if (y < local.top) local.top = y;
+				if (y > local.bottom) local.bottom = y;
 			}
-		});
 
-		foreach (var rect in scans)
-			stencil.Set (rect, false);
+			return local;
+		},
+		local => {
+			if (local.left == int.MaxValue)
+				return;
 
-		boundingBox = new RectangleD (left, top, right - left + 1, bottom - top + 1);
+			lock (bboxLock) {
+				if (local.left < globalLeft) globalLeft = local.left;
+				if (local.right > globalRight) globalRight = local.right;
+				if (local.top < globalTop) globalTop = local.top;
+				if (local.bottom > globalBottom) globalBottom = local.bottom;
+			}
+		}
+	);
+
+	for (int i = 0; i < scans.Length; ++i)
+		stencil.Set(scans[i], false);
+
+	if (globalLeft == int.MaxValue) {
+		boundingBox = RectangleD.Zero;
+		return;
 	}
 
-	// Ported from PDN.
-	public static void FillStencilFromPoint (
-		ImageSurface surface,
-		BitMask stencil,
-		PointI start,
-		int tolerance,
-		out RectangleD boundingBox,
-		Region limitRegion,
-		bool limitToSelection)
-	{
-		ReadOnlySpan<ColorBgra> surf_data = surface.GetReadOnlyPixelData ();
-		int surf_width = surface.Width;
-		ColorBgra cmp = surface.GetColorBgra (surf_data, surf_width, start);
-		int top = int.MaxValue;
-		int bottom = int.MinValue;
-		int left = int.MaxValue;
-		int right = int.MinValue;
-		RectangleI[] scans;
+	boundingBox = new RectangleD(
+		globalLeft,
+		globalTop,
+		globalRight - globalLeft + 1,
+		globalBottom - globalTop + 1);
+}
 
-		stencil.Clear (false);
+	public static void FillStencilFromPoint(
+	ImageSurface surface,
+	BitMask stencil,
+	PointI start,
+	int tolerance,
+	out RectangleD boundingBox,
+	Region limitRegion,
+	bool limitToSelection)
+{
+	ReadOnlySpan<ColorBgra> data = surface.GetReadOnlyPixelData();
+	int width = surface.Width;
+	int height = surface.Height;
 
-		if (limitToSelection) {
-			var excluded = CreateRegion (new RectangleI (0, 0, stencil.Width, stencil.Height));
-			excluded.Xor (limitRegion);
-			scans = new RectangleI[excluded.GetNumRectangles ()];
-			for (int i = 0, n = scans.Length; i < n; ++i) {
-				excluded.GetRectangle (i, out var cairo_rect);
-				scans[i] = cairo_rect.ToRectangleI ();
-			}
-		} else {
-			scans = [];
+	ColorBgra cmp = surface.GetColorBgra(data, width, start);
+
+	int left = start.X;
+	int right = start.X;
+	int top = start.Y;
+	int bottom = start.Y;
+
+	stencil.Clear(false);
+
+	RectangleI[] scans;
+
+	if (limitToSelection) {
+		var excluded = CreateRegion(new RectangleI(0, 0, stencil.Width, stencil.Height));
+		excluded.Xor(limitRegion);
+
+		int n = excluded.GetNumRectangles();
+		scans = new RectangleI[n];
+
+		for (int i = 0; i < n; ++i) {
+			excluded.GetRectangle(i, out var r);
+			scans[i] = r.ToRectangleI();
 		}
 
-		foreach (var rect in scans)
-			stencil.Set (rect, true);
+		for (int i = 0; i < n; ++i)
+			stencil.Set(scans[i], true);
+	} else {
+		scans = Array.Empty<RectangleI>();
+	}
 
-		Queue<PointI> queue = new (16);
-		queue.Enqueue (start);
+	// Simple array-backed queue
+	PointI[] queue = new PointI[1024];
+	int qHead = 0;
+	int qTail = 0;
 
-		while (queue.Count > 0) {
-			PointI pt = queue.Dequeue ();
+	queue[qTail++] = start;
 
-			ReadOnlySpan<ColorBgra> row = surf_data.Slice (pt.Y * surf_width, surf_width);
-			int localLeft = pt.X - 1;
-			int localRight = pt.X;
+	while (qHead != qTail) {
+		PointI pt = queue[qHead++];
+		if (qHead == queue.Length) qHead = 0;
 
-			while (localLeft >= 0 &&
-				   !stencil.Get (localLeft, pt.Y) &&
-				   ColorBgra.ColorsWithinTolerance (cmp, row[localLeft], tolerance)) {
-				stencil.Set (localLeft, pt.Y, true);
-				--localLeft;
-			}
+		int y = pt.Y;
+		int rowOffset = y * width;
+		ReadOnlySpan<ColorBgra> row = data.Slice(rowOffset, width);
 
-			int surfaceWidth = surface.Width;
-			while (
-				localRight < surfaceWidth
-				&& !stencil.Get (localRight, pt.Y)
-				&& ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
-				stencil.Set (localRight, pt.Y, true);
-				++localRight;
-			}
+		int xLeft = pt.X;
+		int xRight = pt.X;
 
-			++localLeft;
-			--localRight;
+		while (xLeft - 1 >= 0 &&
+		       !stencil.Get(xLeft - 1, y) &&
+		       ColorBgra.ColorsWithinTolerance(cmp, row[xLeft - 1], tolerance)) {
+			--xLeft;
+			stencil.Set(xLeft, y, true);
+		}
 
-			void CheckRow (ReadOnlySpan<ColorBgra> surf_data, int row)
-			{
-				int sleft = localLeft;
-				int sright = localLeft;
-				ReadOnlySpan<ColorBgra> other_row = surf_data.Slice (row * surf_width, surf_width);
+		while (xRight < width &&
+		       !stencil.Get(xRight, y) &&
+		       ColorBgra.ColorsWithinTolerance(cmp, row[xRight], tolerance)) {
+			stencil.Set(xRight, y, true);
+			++xRight;
+		}
 
-				for (int sx = localLeft; sx <= localRight; ++sx) {
-					if (!stencil.Get (sx, row) &&
-						ColorBgra.ColorsWithinTolerance (cmp, other_row[sx], tolerance)) {
-						++sright;
-					} else {
-						if (sright - sleft > 0)
-							queue.Enqueue (new PointI (sleft, row));
+		--xRight;
 
-						++sright;
-						sleft = sright;
-					}
+		if (xLeft < left) left = xLeft;
+		if (xRight > right) right = xRight;
+		if (y < top) top = y;
+		if (y > bottom) bottom = y;
+
+		// Check row above
+		if (y > 0) {
+			int oy = y - 1;
+			int offset = oy * width;
+			ReadOnlySpan<ColorBgra> orow = data.Slice(offset, width);
+
+			int sx = xLeft;
+			while (sx <= xRight) {
+				while (sx <= xRight &&
+				       (stencil.Get(sx, oy) ||
+				        !ColorBgra.ColorsWithinTolerance(cmp, orow[sx], tolerance))) {
+					++sx;
 				}
 
-				if (sright - sleft > 0)
-					queue.Enqueue (new PointI (sleft, row));
+				if (sx <= xRight) {
+					queue[qTail++] = new PointI(sx, oy);
+					if (qTail == queue.Length) qTail = 0;
+
+					while (sx <= xRight &&
+					       !stencil.Get(sx, oy) &&
+					       ColorBgra.ColorsWithinTolerance(cmp, orow[sx], tolerance)) {
+						++sx;
+					}
+				}
 			}
-
-			if (pt.Y > 0)
-				CheckRow (surf_data, pt.Y - 1);
-
-			if (pt.Y < surface.Height - 1)
-				CheckRow (surf_data, pt.Y + 1);
-
-			if (localLeft < left)
-				left = localLeft;
-
-			if (localRight > right)
-				right = localRight;
-
-			if (pt.Y < top)
-				top = pt.Y;
-
-			if (pt.Y > bottom)
-				bottom = pt.Y;
 		}
 
-		foreach (var rect in scans)
-			stencil.Set (rect, false);
+		// Check row below
+		if (y < height - 1) {
+			int oy = y + 1;
+			int offset = oy * width;
+			ReadOnlySpan<ColorBgra> orow = data.Slice(offset, width);
 
-		boundingBox = new RectangleD (left, top, right - left + 1, bottom - top + 1);
+			int sx = xLeft;
+			while (sx <= xRight) {
+				while (sx <= xRight &&
+				       (stencil.Get(sx, oy) ||
+				        !ColorBgra.ColorsWithinTolerance(cmp, orow[sx], tolerance))) {
+					++sx;
+				}
+
+				if (sx <= xRight) {
+					queue[qTail++] = new PointI(sx, oy);
+					if (qTail == queue.Length) qTail = 0;
+
+					while (sx <= xRight &&
+					       !stencil.Get(sx, oy) &&
+					       ColorBgra.ColorsWithinTolerance(cmp, orow[sx], tolerance)) {
+						++sx;
+					}
+				}
+			}
+		}
 	}
+
+	for (int i = 0; i < scans.Length; ++i)
+		stencil.Set(scans[i], false);
+
+	boundingBox = new RectangleD(
+		left,
+		top,
+		right - left + 1,
+		bottom - top + 1);
+}
 }

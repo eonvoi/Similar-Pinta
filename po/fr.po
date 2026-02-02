@@ -699,7 +699,7 @@ msgstr "Taille du téléchargement : {0}"
 msgid "Duplicate Layer"
 msgstr "Dupliquer le calque"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:2
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Créer et modifier facilement des images"
@@ -1051,7 +1051,7 @@ msgstr "Si vous n’enregistrez pas, toutes les modifications seront perdues."
 msgid "Image"
 msgstr "Image"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Éditeur d’images"
 
@@ -1775,7 +1775,7 @@ msgstr "Photo"
 msgid "Phyllotaxis"
 msgstr "Phyllotaxie"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
@@ -1789,7 +1789,7 @@ msgstr "Communauté des extensions Pinta - Multiplate-forme"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Communauté des extensions Pinta - Plate-forme spécifique"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Éditeur d’images Pinta"
 
@@ -1803,7 +1803,7 @@ msgstr ""
 "Pinta ne prend pas en charge l’enregistrement des images dans ce format de "
 "fichier."
 
-#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
+#: ../xdg/com.github.eonvoi.FamiliarPinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -2809,7 +2809,7 @@ msgstr "_Fenêtre"
 msgid "by Pinta contributors"
 msgstr "par les contributeurs de Pinta"
 
-#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
+#: ../xdg/com.github.eonvoi.FamiliarPinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "dessiner ; dessin ; peindre ; peinture ; graphiques ; trame ; 2d ;"
 
