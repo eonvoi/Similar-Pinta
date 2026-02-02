@@ -27,6 +27,7 @@ I know for a fact my code would never get accepted into the original project, bu
 - Fixed a bug where when dragging the `Color Pickers` really fast would crash the whole app
 - Fixed a visual bug where, when using the `Paintbrush` tool, the blend mode of a layer wouldn't be visible to the user until the canvas was invalidated and redrawn
 - Simplified `Shape Type` names to be more intuitive to the user
+- Added a "Soft" type of brush to the `Paintbrush` tool
 - *Reformatted some code / changed variable names for readibility*
 - ***(From a WIP PR in the original repo, I'm not the one who implemented this):*** Upgraded the transform tool to be able to accurately transform the selected pixels
 - ***(From a PR in the original repo, I'm not the one who implemented this):*** The text tool's font family and font size are now 2 separate UI elements
