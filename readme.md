@@ -9,7 +9,7 @@
 > You must build from source, I won't provide binaries for this project.
 
 ### Here's how my modified version looks:
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/660659c3-730a-4732-a3b5-91362505d791" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/95322c71-1aba-49e6-8c6c-6638be6a09fa" />
 
 ### Changes made
 Generally, I'm trying to make this fork's layout as similar to Paint.NET as possible.<br>
